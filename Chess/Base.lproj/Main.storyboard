@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Setup View Controller-->
         <scene sceneID="UMn-Ew-0Pa">
             <objects>
-                <viewController id="O6V-Up-3WY" sceneMemberID="viewController">
+                <viewController id="O6V-Up-3WY" userLabel="Setup View Controller" customClass="SetupViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GMm-yQ-ikM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,7 +32,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                         <state key="normal" title="Begin"/>
                                         <connections>
-                                            <segue destination="BV1-FR-VrT" kind="presentation" id="NAQ-JO-gb5"/>
+                                            <action selector="beginButtonPressed:" destination="O6V-Up-3WY" eventType="touchUpInside" id="GFR-MV-xld"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -53,16 +53,31 @@
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chessView" id="BV1-FR-VrT" customClass="GameViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="371-rT-JJZ">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </sceneKitView>
+                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="371-rT-JJZ" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="5Um-f8-s3w"/>
+                            <constraint firstItem="371-rT-JJZ" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="M9i-ka-ypI"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="371-rT-JJZ" secondAttribute="trailing" id="nMb-c1-HtW"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="bottom" secondItem="371-rT-JJZ" secondAttribute="bottom" id="wAb-xJ-reM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                     </view>
+                    <connections>
+                        <outlet property="sceneView" destination="371-rT-JJZ" id="SvZ-dE-2DK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="669.60000000000002" y="110.19490254872565"/>
         </scene>
     </scenes>
 </document>
