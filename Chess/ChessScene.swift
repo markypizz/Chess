@@ -13,8 +13,10 @@ class ChessScene {
     let scene = SCNScene(named: "ChessScene.scn")
     
     init() {
+        let material = SCNMaterial()
+        material.diffuse.contents = UIImage(named: "chessboard")
+        scene?.rootNode.childNode(withName: "plane", recursively: false)?.geometry?.materials = [material]
     }
-    
     
     func tapped(node: SCNNode) {
         print(node.name!)
