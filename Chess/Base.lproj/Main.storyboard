@@ -112,7 +112,9 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="beginButton" destination="dhB-td-GD2" id="MLS-Ku-Omz"/>
+                        <outlet property="blackSegmentedControl" destination="h4C-Ff-FzS" id="75m-Rx-xHq"/>
                         <outlet property="optionsView" destination="yqh-HH-aQf" id="fmA-zh-X3Z"/>
+                        <outlet property="whiteSegmentedControl" destination="Ahj-o8-M82" id="uiu-WE-BEd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VoB-hr-sbM" userLabel="First Responder" sceneMemberID="firstResponder"/>

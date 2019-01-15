@@ -21,6 +21,10 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate {
     @IBOutlet weak var optionsView: UIView!
     
     @IBOutlet weak var beginButton: UIButton!
+    
+    @IBOutlet weak var whiteSegmentedControl: UISegmentedControl!
+    
+    @IBOutlet weak var blackSegmentedControl: UISegmentedControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +39,13 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate {
 
         gameView = storyboard?.instantiateViewController(withIdentifier: "chessView") as? GameViewController
         
+        Chess.sharedInstance = Chess()
+        Chess.sharedInstance.game = ChessGame(white: PlayerType(rawValue: whiteSegmentedControl!.selectedSegmentIndex)!, black: PlayerType(rawValue: blackSegmentedControl!.selectedSegmentIndex)!)
+        
+        Chess.sharedInstance.scene = ChessScene()
+        
         self.present(gameView, animated: true, completion: { () in
-            self.gameView.sceneView.scene = self.gameView.chessScene.scene
+            self.gameView.sceneView.scene = Chess.sharedInstance.scene.scene
         })
     }
     

@@ -10,8 +10,7 @@ import Foundation
 import SwiftChess
 
 class ChessGame : GameDelegate {
-    
-    var game: Game
+    var gameInstance: Game
     var whitePlayer : Player
     var blackPlayer : Player
     
@@ -28,9 +27,11 @@ class ChessGame : GameDelegate {
             blackPlayer = Human(color: .black)
         }
         
-        game = Game(firstPlayer: whitePlayer, secondPlayer: blackPlayer)
+        gameInstance = Game(firstPlayer: whitePlayer, secondPlayer: blackPlayer)
         
-        game.delegate = self
+        //Chess.sharedInstance.scene = ChessScene()
+        
+        gameInstance.delegate = self
     }
     
     func movePiece(from: String, to: String) {
@@ -77,3 +78,5 @@ class ChessGame : GameDelegate {
         //
     }
 }
+
+

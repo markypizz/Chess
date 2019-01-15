@@ -15,8 +15,6 @@ class GameViewController: UIViewController {
     @IBOutlet weak var sceneView: SCNView!
     
     @IBOutlet weak var cameraLockSwitch: UISwitch!
-    
-    let chessScene = ChessScene()
     var recognizer : UITapGestureRecognizer!
     
     override func viewDidLoad() {
@@ -63,9 +61,9 @@ class GameViewController: UIViewController {
             case "board":
                 break
             case "plane":
-                chessScene.tapped(boardLocation: (hits.first?.worldCoordinates)!)
+                Chess.sharedInstance.scene.tapped(boardLocation: (hits.first?.worldCoordinates)!)
             default: //chesspiece
-                chessScene.tapped(node: tappedNode!)
+                Chess.sharedInstance.scene.tapped(node: tappedNode!)
             }
         }
     }
