@@ -14,12 +14,19 @@ enum LoadError : Error {
     case runtimeError(String)
 }
 
-class SetupViewController: UIViewController, SCNSceneRendererDelegate{
+class SetupViewController: UIViewController, SCNSceneRendererDelegate {
     
     var gameView : GameViewController!
+    
+    @IBOutlet weak var optionsView: UIView!
+    
+    @IBOutlet weak var beginButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        beginButton.layer.cornerRadius = 8.0
+        optionsView.layer.cornerRadius = 8.0
 
         // Do any additional setup after loading the view.
     }

@@ -14,27 +14,27 @@ class GameViewController: UIViewController {
 
     @IBOutlet weak var sceneView: SCNView!
     
+    @IBOutlet weak var cameraLockSwitch: UISwitch!
+    
     let chessScene = ChessScene()
     var recognizer : UITapGestureRecognizer!
-    var slider = UISlider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         sceneView.antialiasingMode = .multisampling4X
+        
         recognizer = UITapGestureRecognizer(target: self, action: #selector(self.tapped(rec:)))
         
         //sceneView.scene = chessScene
         sceneView.addGestureRecognizer(recognizer)
-        sceneView.addSubview(slider)
-        slider.maximumValue = 180
-        slider.minimumValue = 0
-        slider.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
         
+        //disableFreeRoam()
+        
+        sceneView.allowsCameraControl = false
     }
     
     override func viewDidLayoutSubviews() {
-        slider.center.y = sceneView.center.y
-        slider.center.x = sceneView.bounds.maxX - 10
+        
     }
 
     override var shouldAutorotate: Bool {
@@ -58,7 +58,44 @@ class GameViewController: UIViewController {
         let hits = self.sceneView.hitTest(location, options: nil)
         if !hits.isEmpty{
             let tappedNode = hits.first?.node
-            chessScene.tapped(node: tappedNode!)
+            
+            switch (tappedNode?.name) {
+            case "board":
+                break
+            case "plane":
+                chessScene.tapped(boardLocation: (hits.first?.worldCoordinates)!)
+            default: //chesspiece
+                chessScene.tapped(node: tappedNode!)
+            }
         }
     }
+    
+    func enableFreeRoam() {
+        recognizer.isEnabled = false
+        //sceneView.allowsCameraControl = true
+    }
+    
+    func disableFreeRoam() {
+        recognizer.isEnabled = true
+        sceneView.allowsCameraControl = false
+        
+        
+        //sceneView.allowsCameraControl = false
+        //sceneView.pointOfView = chessScene.scene?.rootNode.childNode(withName: "camera", recursively: false)
+        
+        
+        //sceneView.defaultCameraController.pointOfView = chessScene.scene?.rootNode.childNode(withName: "camera", recursively: false)
+        
+        //chessScene.scene?.rootNode.camera.
+    }
+    
+    @IBAction func cameraLockSwitched(_ sender: UISwitch) {
+        
+        if (sender.isOn) {
+            disableFreeRoam()
+        } else {
+            enableFreeRoam()
+        }
+    }
+    
 }

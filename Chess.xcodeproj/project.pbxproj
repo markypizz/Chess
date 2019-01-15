@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		231201BF21DDB18C002754D9 /* ChessGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231201BE21DDB18C002754D9 /* ChessGame.swift */; };
 		234580BD21D1EE0100CF6956 /* ChessScene.scn in Resources */ = {isa = PBXBuildFile; fileRef = 234580BC21D1EE0100CF6956 /* ChessScene.scn */; };
 		234580C421D1F13F00CF6956 /* ChessScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234580C321D1F13F00CF6956 /* ChessScene.swift */; };
 		2361C10321D1870B004362A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2361C10221D1870B004362A5 /* AppDelegate.swift */; };
@@ -16,6 +17,7 @@
 		2361C11321D1870D004362A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2361C11121D1870D004362A5 /* LaunchScreen.storyboard */; };
 		2361C11E21D1870D004362A5 /* ChessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2361C11D21D1870D004362A5 /* ChessTests.swift */; };
 		2366F77121D5F58800218D09 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2366F77021D5F58800218D09 /* SetupViewController.swift */; };
+		23A9017921D9E0D400A05808 /* ConstantsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A9017821D9E0D400A05808 /* ConstantsModel.swift */; };
 		28DF01F57FBD37C689ADEACA /* Pods_ChessTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F8BB10473BF728AAF2FBA52 /* Pods_ChessTests.framework */; };
 		D3F17FE91D2F50F5AD982DAE /* Pods_Chess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D627E830E359A77CDC0950C /* Pods_Chess.framework */; };
 /* End PBXBuildFile section */
@@ -32,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		1452C2AD7DDDEEAB95F093DD /* Pods-ChessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChessTests/Pods-ChessTests.release.xcconfig"; sourceTree = "<group>"; };
+		231201BE21DDB18C002754D9 /* ChessGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessGame.swift; sourceTree = "<group>"; };
 		234580BC21D1EE0100CF6956 /* ChessScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ChessScene.scn; sourceTree = "<group>"; };
 		234580C321D1F13F00CF6956 /* ChessScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessScene.swift; sourceTree = "<group>"; };
 		2361C0FF21D1870B004362A5 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +48,7 @@
 		2361C11D21D1870D004362A5 /* ChessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessTests.swift; sourceTree = "<group>"; };
 		2361C11F21D1870D004362A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2366F77021D5F58800218D09 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
+		23A9017821D9E0D400A05808 /* ConstantsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsModel.swift; sourceTree = "<group>"; };
 		55F87506BC3438FA09897DB9 /* Pods-Chess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chess.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chess/Pods-Chess.debug.xcconfig"; sourceTree = "<group>"; };
 		5D627E830E359A77CDC0950C /* Pods_Chess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F8BB10473BF728AAF2FBA52 /* Pods_ChessTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChessTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,7 +103,9 @@
 				234580BC21D1EE0100CF6956 /* ChessScene.scn */,
 				234580C321D1F13F00CF6956 /* ChessScene.swift */,
 				2361C10A21D1870B004362A5 /* GameViewController.swift */,
+				23A9017821D9E0D400A05808 /* ConstantsModel.swift */,
 				2366F77021D5F58800218D09 /* SetupViewController.swift */,
+				231201BE21DDB18C002754D9 /* ChessGame.swift */,
 				2361C10C21D1870B004362A5 /* Main.storyboard */,
 				2361C10F21D1870D004362A5 /* Assets.xcassets */,
 				2361C11121D1870D004362A5 /* LaunchScreen.storyboard */,
@@ -311,6 +317,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				231201BF21DDB18C002754D9 /* ChessGame.swift in Sources */,
+				23A9017921D9E0D400A05808 /* ConstantsModel.swift in Sources */,
 				2361C10B21D1870B004362A5 /* GameViewController.swift in Sources */,
 				2361C10321D1870B004362A5 /* AppDelegate.swift in Sources */,
 				234580C421D1F13F00CF6956 /* ChessScene.swift in Sources */,
