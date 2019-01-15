@@ -33,8 +33,10 @@ class ChessScene {
 
         scene?.background.contents = bgImage
         
-        initializeWhitePieces(locations: Chess.sharedInstance.game.gameInstance.board.getLocations(of: Color.white))
-        initializeBlackPieces(locations: Chess.sharedInstance.game.gameInstance.board.getLocations(of: Color.black))
+        var allPieceLocations = Chess.sharedInstance.game.gameInstance.board.getLocations(of: Color.white)
+        allPieceLocations += Chess.sharedInstance.game.gameInstance.board.getLocations(of: Color.black)
+        
+        initializePieces(locations: allPieceLocations)
     }
     
     func tapped(node: SCNNode) {
@@ -59,24 +61,53 @@ class ChessScene {
         
         print("\(x),\(y)")
         
-        return SCNVector3(x: x, y: 0.51, z: y)
+        //Alignment is a bit different
+        return SCNVector3(x: y, y: 0.51, z: x)
         
     }
     
-    func initializeWhitePieces(locations : [BoardLocation]) {
+    func initializePieces(locations : [BoardLocation]) {
+        var baseNode : SCNNode!
+        var scenePiece : SCNNode!
         for location in locations {
             let piece = Chess.sharedInstance.game.gameInstance.board.getPiece(at: location)
-            
-            if (piece?.type == Piece.PieceType.pawn) {
-                let scenePiece = scene?.rootNode.childNode(withName: "WhitePawn", recursively: false)?.clone()
-                scenePiece?.isHidden = false
-                scenePiece?.position = nodePositionFor(boardLocation: location)
+
+            //White Pieces
+            if (piece?.type == Piece.PieceType.pawn && (piece?.color)! == Color.white) {
+                baseNode = (scene?.rootNode.childNode(withName: "WhitePawn", recursively: false))!
+            } else if (piece?.type == Piece.PieceType.rook && piece?.color == Color.white) {
+                baseNode = (scene?.rootNode.childNode(withName: "WhiteRook", recursively: false))!
+            } else if (piece?.type == Piece.PieceType.knight && piece?.color == Color.white) {
+                baseNode = (scene?.rootNode.childNode(withName: "WhiteKnight", recursively: false))!
+            } else if (piece?.type == Piece.PieceType.bishop && piece?.color == Color.white) {
+                baseNode = (scene?.rootNode.childNode(withName: "WhiteBishop", recursively: false))!
+            } else if (piece?.type == Piece.PieceType.queen && piece?.color == Color.white) {
+                baseNode = (scene?.rootNode.childNode(withName: "WhiteQueen", recursively: false))!
+            } else if (piece?.type == Piece.PieceType.king && piece?.color == Color.white) {
+                baseNode = (scene?.rootNode.childNode(withName: "WhiteKing", recursively: false))!
+                
+            //Black Pieces
+            } else if (piece?.type == Piece.PieceType.pawn && piece?.color == Color.black) {
+                baseNode = (scene?.rootNode.childNode(withName: "BlackPawn", recursively: false))!
+            } else if (piece?.type == Piece.PieceType.rook && piece?.color == Color.black) {
+                baseNode = (scene?.rootNode.childNode(withName: "BlackRook", recursively: false))!
+            } else if (piece?.type == Piece.PieceType.knight && piece?.color == Color.black) {
+                baseNode = (scene?.rootNode.childNode(withName: "BlackKnight", recursively: false))!
+            } else if (piece?.type == Piece.PieceType.bishop && piece?.color == Color.black) {
+                baseNode = (scene?.rootNode.childNode(withName: "BlackBishop", recursively: false))!
+            } else if (piece?.type == Piece.PieceType.queen && piece?.color == Color.black) {
+                baseNode = (scene?.rootNode.childNode(withName: "BlackQueen", recursively: false))!
+            } else if (piece?.type == Piece.PieceType.king && piece?.color == Color.black) {
+                baseNode = (scene?.rootNode.childNode(withName: "BlackKing", recursively: false))!
             }
+            
+            scenePiece = baseNode.clone()
+            scenePiece.geometry = baseNode.geometry?.copy() as? SCNGeometry
+            scenePiece.isHidden = false
+            scenePiece.position = nodePositionFor(boardLocation: location)
+            scene?.rootNode.addChildNode(scenePiece)
+            pieces.append(SceneChessPiece(loc: location, piece: scenePiece))
         }
-    }
-    
-    func initializeBlackPieces(locations : [BoardLocation]) {
-        
     }
 }
 
