@@ -32,14 +32,30 @@ class ChessGame : GameDelegate {
         //Chess.sharedInstance.scene = ChessScene()
         
         gameInstance.delegate = self
+        
+        //Call delegate function to start game with white player
+        gameDidChangeCurrentPlayer(game: gameInstance)
     }
     
-    func movePiece(from: String, to: String) {
-        
+    func movePiece(start: BoardLocation, end: BoardLocation) throws{
+        if let player = Chess.sharedInstance.game.gameInstance.currentPlayer as? Human {
+            do {
+                try player.movePiece(from: start, to: end)
+            } catch {
+                print(error)
+            }
+            
+        } else {
+            throw ChessError.humanMoveRequestedOnNonHumanTurn
+        }
     }
     
     func gameDidChangeCurrentPlayer(game: Game) {
         
+        //AI will make move on its turn
+        if let player = game.currentPlayer as? AIPlayer {
+            player.makeMoveAsync()
+        }
     }
     
     func gameWonByPlayer(game: Game, player: Player) {

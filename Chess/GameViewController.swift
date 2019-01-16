@@ -28,7 +28,7 @@ class GameViewController: UIViewController {
         
         //disableFreeRoam()
         
-        sceneView.allowsCameraControl = false
+        //sceneView.allowsCameraControl = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -61,7 +61,7 @@ class GameViewController: UIViewController {
             case "board":
                 break
             case "plane":
-                Chess.sharedInstance.scene.tapped(boardLocation: (hits.first?.worldCoordinates)!)
+                Chess.sharedInstance.scene.tapped(location: (hits.first?.worldCoordinates)!)
             default: //chesspiece
                 Chess.sharedInstance.scene.tapped(node: tappedNode!)
             }
@@ -75,7 +75,7 @@ class GameViewController: UIViewController {
     
     func disableFreeRoam() {
         recognizer.isEnabled = true
-        sceneView.allowsCameraControl = false
+        //sceneView.allowsCameraControl = false
         
         
         //sceneView.allowsCameraControl = false

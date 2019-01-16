@@ -27,3 +27,7 @@ class Chess {
     
     init() {}
 }
+
+enum ChessError : Error {
+    case humanMoveRequestedOnNonHumanTurn
+}
