@@ -36,7 +36,7 @@
 		1452C2AD7DDDEEAB95F093DD /* Pods-ChessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChessTests/Pods-ChessTests.release.xcconfig"; sourceTree = "<group>"; };
 		231201BE21DDB18C002754D9 /* ChessGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessGame.swift; sourceTree = "<group>"; };
 		234580BC21D1EE0100CF6956 /* ChessScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ChessScene.scn; sourceTree = "<group>"; };
-		234580C321D1F13F00CF6956 /* ChessScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessScene.swift; sourceTree = "<group>"; };
+		234580C321D1F13F00CF6956 /* ChessScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		2361C0FF21D1870B004362A5 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2361C10221D1870B004362A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2361C10A21D1870B004362A5 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };

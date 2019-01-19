@@ -37,12 +37,12 @@ class ChessGame : GameDelegate {
         gameDidChangeCurrentPlayer(game: gameInstance)
     }
     
-    func movePiece(start: BoardLocation, end: BoardLocation) throws{
+    func movePiece(start: BoardLocation, end: BoardLocation) throws {
         if let player = Chess.sharedInstance.game.gameInstance.currentPlayer as? Human {
             do {
                 try player.movePiece(from: start, to: end)
             } catch {
-                print(error)
+                throw error
             }
             
         } else {

@@ -19,11 +19,29 @@ class ChessScene {
     let pieceCoordOffset : Float = 3.5
     let boardCoordOffset : Float = 4.0
     
+    let pieceMoveSpeed : Float = 3
+    
     var pieces = [SceneChessPiece]()
+    var highlightedPiece : SCNNode? = nil
     
     var firstTappedLocation : BoardLocation? {
         didSet {
-            //Highlight board piece on location (clear the last one)
+            //Highlight board piece on location, clear last highlight
+            
+            guard firstTappedLocation != nil else {
+                //clear glow
+                //
+                //
+                return
+            }
+            
+            if let piece = pieceAtLocation(firstTappedLocation!) {
+                //Piece found
+                
+                //Highlight piece
+                highlight(node: piece)
+                highlightedPiece = piece
+            }
         }
     }
     
@@ -46,10 +64,10 @@ class ChessScene {
                 
                 do {
                     try Chess.sharedInstance.game.movePiece(start: firstTappedLocation!, end: secondTappedLocation!)
-                    //Move piece on-screen
+                    try movePiece()
+                    print("moved")
                 } catch {
                     print(error)
-                    
                 }
                 
                 //Deselect after move attempt (or user attempted to clear selection)
@@ -121,6 +139,40 @@ class ChessScene {
         return location
     }
     
+    func pieceAtLocation(_ location : BoardLocation) -> SCNNode? {
+        for piece in pieces {
+            if piece.location == location {
+                return piece.scenePiece
+            }
+        }
+        return nil
+    }
+    
+    func removePieceFromBoard(_ piece : SCNNode) {
+        for i in 0..<pieces.count {
+            if pieces[i].scenePiece == piece {
+                //Fade piece out
+                let fade = SCNAction.fadeOut(duration: 0.5)
+                
+                piece.runAction(fade) {
+                    piece.removeFromParentNode()
+                }
+                
+                pieces.remove(at: i)
+                return
+            }
+        }
+    }
+    
+    func updateLocationFor(piece : SCNNode, location: BoardLocation) {
+        for i in 0..<pieces.count {
+            if pieces[i].scenePiece == piece {
+                pieces[i].location = location
+                return
+            }
+        }
+    }
+    
     func initializePieces(locations : [BoardLocation]) {
         var baseNode : SCNNode!
         var scenePiece : SCNNode!
@@ -163,6 +215,46 @@ class ChessScene {
             scene?.rootNode.addChildNode(scenePiece)
             pieces.append(SceneChessPiece(loc: location, piece: scenePiece))
         }
+    }
+    
+    // TODO: Finish
+    func highlight(node: SCNNode) {
+        //let technique = SCNTechnique.init(bySequencingTechniques: )
+    }
+    
+    func unhighlight(node : SCNNode) {
+        
+    }
+    
+    func movePiece() throws {
+        let startPiece = pieceAtLocation(firstTappedLocation!)
+        let endPiece = pieceAtLocation(secondTappedLocation!)
+        
+        guard startPiece != nil else {
+            throw ChessError.noPieceFoundOnFirstTapLocation
+        }
+        
+        let startCoords = nodePositionFor(boardLocation: firstTappedLocation!)
+        let finalCoords = nodePositionFor(boardLocation: secondTappedLocation!)
+        
+        let move = SCNAction.move(to: finalCoords, duration: durationForMoveBetween(start: startCoords, end: finalCoords))
+        
+        startPiece?.runAction(move)
+        
+        if (endPiece != nil) {
+            removePieceFromBoard(endPiece!)
+        }
+        
+        updateLocationFor(piece: startPiece!, location: secondTappedLocation!)
+    }
+    
+    func durationForMoveBetween(start: SCNVector3, end: SCNVector3) -> TimeInterval {
+        let distance = SCNVector3(end.x - start.x, end.y - start.y, end.z - start.z)
+        
+        //Trigonometry!
+        let length = sqrtf(powf(distance.x, 2.0) + powf(distance.y, 2.0) + powf(distance.z, 2.0))
+        
+        return TimeInterval(length / pieceMoveSpeed)
     }
 }
 
