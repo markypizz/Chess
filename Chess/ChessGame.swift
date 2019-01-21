@@ -79,7 +79,7 @@ class ChessGame : GameDelegate {
     }
     
     func gameDidMovePiece(game: Game, piece: Piece, toLocation: BoardLocation) {
-        print("gameMovedPiece")
+        Chess.sharedInstance.scene.movePiece(from: piece.location, to: toLocation)
     }
     
     func gameDidTransformPiece(game: Game, piece: Piece, location: BoardLocation) {

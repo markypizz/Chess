@@ -64,8 +64,6 @@ class ChessScene {
                 
                 do {
                     try Chess.sharedInstance.game.movePiece(start: firstTappedLocation!, end: secondTappedLocation!)
-                    try movePiece()
-                    print("moved")
                 } catch {
                     print(error)
                 }
@@ -226,16 +224,12 @@ class ChessScene {
         
     }
     
-    func movePiece() throws {
-        let startPiece = pieceAtLocation(firstTappedLocation!)
-        let endPiece = pieceAtLocation(secondTappedLocation!)
+    func movePiece(from: BoardLocation, to: BoardLocation) {
+        let startPiece = pieceAtLocation(from)
+        let endPiece = pieceAtLocation(to)
         
-        guard startPiece != nil else {
-            throw ChessError.noPieceFoundOnFirstTapLocation
-        }
-        
-        let startCoords = nodePositionFor(boardLocation: firstTappedLocation!)
-        let finalCoords = nodePositionFor(boardLocation: secondTappedLocation!)
+        let startCoords = nodePositionFor(boardLocation: from)
+        let finalCoords = nodePositionFor(boardLocation: to)
         
         let move = SCNAction.move(to: finalCoords, duration: durationForMoveBetween(start: startCoords, end: finalCoords))
         
@@ -245,7 +239,7 @@ class ChessScene {
             removePieceFromBoard(endPiece!)
         }
         
-        updateLocationFor(piece: startPiece!, location: secondTappedLocation!)
+        updateLocationFor(piece: startPiece!, location: to)
     }
     
     func durationForMoveBetween(start: SCNVector3, end: SCNVector3) -> TimeInterval {
