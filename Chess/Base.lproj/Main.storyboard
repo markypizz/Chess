@@ -130,9 +130,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="371-rT-JJZ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </sceneKitView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crd-4l-KKg">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crd-4l-KKg" userLabel="Bottom Bar View">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WPy-3n-8kx">
@@ -155,7 +155,8 @@
                             <constraint firstItem="crd-4l-KKg" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="3pi-NZ-Buu"/>
                             <constraint firstItem="371-rT-JJZ" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="5Um-f8-s3w"/>
                             <constraint firstItem="crd-4l-KKg" firstAttribute="bottom" secondItem="4qk-I5-YsI" secondAttribute="bottom" id="8JX-Pc-q43"/>
-                            <constraint firstItem="371-rT-JJZ" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="M9i-ka-ypI"/>
+                            <constraint firstItem="371-rT-JJZ" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="M9i-ka-ypI"/>
+                            <constraint firstItem="crd-4l-KKg" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="bottom" constant="-50" id="d3J-8A-uFx"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="371-rT-JJZ" secondAttribute="trailing" id="nMb-c1-HtW"/>
                             <constraint firstItem="crd-4l-KKg" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="nRI-Y0-pb3"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="bottom" secondItem="371-rT-JJZ" secondAttribute="bottom" id="wAb-xJ-reM"/>

@@ -40,10 +40,13 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate {
         gameView = storyboard?.instantiateViewController(withIdentifier: "chessView") as? GameViewController
         
         Chess.sharedInstance = Chess()
+        
         Chess.sharedInstance.game = ChessGame(white: PlayerType(rawValue: whiteSegmentedControl!.selectedSegmentIndex)!, black: PlayerType(rawValue: blackSegmentedControl!.selectedSegmentIndex)!)
         
         Chess.sharedInstance.scene = ChessScene()
         
+        //Looking into a more pleasing animation
+        self.modalPresentationStyle = .overFullScreen
         self.present(gameView, animated: true, completion: { () in
             self.gameView.sceneView.scene = Chess.sharedInstance.scene.scene
         })

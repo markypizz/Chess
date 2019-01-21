@@ -32,9 +32,6 @@ class ChessGame : GameDelegate {
         //Chess.sharedInstance.scene = ChessScene()
         
         gameInstance.delegate = self
-        
-        //Call delegate function to start game with white player
-        gameDidChangeCurrentPlayer(game: gameInstance)
     }
     
     func movePiece(start: BoardLocation, end: BoardLocation) throws {
@@ -79,7 +76,7 @@ class ChessGame : GameDelegate {
     }
     
     func gameDidMovePiece(game: Game, piece: Piece, toLocation: BoardLocation) {
-        Chess.sharedInstance.scene.movePiece(from: piece.location, to: toLocation)
+        Chess.sharedInstance.scene.moveNode(from: piece.location, to: toLocation)
     }
     
     func gameDidTransformPiece(game: Game, piece: Piece, location: BoardLocation) {

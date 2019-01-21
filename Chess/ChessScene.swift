@@ -19,7 +19,12 @@ class ChessScene {
     let pieceCoordOffset : Float = 3.5
     let boardCoordOffset : Float = 4.0
     
+    var rendered = false
+    
+    //Adjustable
+    let nodeMovement : nodeMovementType = nodeMovementType.constantDuration
     let pieceMoveSpeed : Float = 3
+    let nodeMoveDuration : TimeInterval = TimeInterval(0.25)
     
     var pieces = [SceneChessPiece]()
     var highlightedPiece : SCNNode? = nil
@@ -88,9 +93,11 @@ class ChessScene {
         
         initializePieces(locations: allPieceLocations)
         
-        let bgImage = UIImage(named: "woodenlounge")
+        #if !targetEnvironment(simulator)
+            let bgImage = UIImage(named: "woodenlounge")
+            scene?.background.contents = bgImage
+        #endif
         
-        scene?.background.contents = bgImage
     }
     
     func tapped(node: SCNNode) {
@@ -224,14 +231,22 @@ class ChessScene {
         
     }
     
-    func movePiece(from: BoardLocation, to: BoardLocation) {
+    func moveNode(from: BoardLocation, to: BoardLocation) {
         let startPiece = pieceAtLocation(from)
         let endPiece = pieceAtLocation(to)
         
         let startCoords = nodePositionFor(boardLocation: from)
         let finalCoords = nodePositionFor(boardLocation: to)
         
-        let move = SCNAction.move(to: finalCoords, duration: durationForMoveBetween(start: startCoords, end: finalCoords))
+        var duration : TimeInterval
+        
+        if (nodeMovement == .constantSpeed) {
+            duration = durationForMoveBetween(start: startCoords, end: finalCoords)
+        } else /* .constantDuration */ {
+            duration = nodeMoveDuration
+        }
+        
+        let move = SCNAction.move(to: finalCoords, duration: duration)
         
         startPiece?.runAction(move)
         
@@ -250,6 +265,14 @@ class ChessScene {
         
         return TimeInterval(length / pieceMoveSpeed)
     }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
+        
+        if !rendered {
+            print("rendered")
+            rendered = true
+        }
+    }
 }
 
 class SceneChessPiece {
@@ -260,4 +283,10 @@ class SceneChessPiece {
         location = loc
         scenePiece = piece
     }
+}
+
+//Pieces will either move with constant speed or with constant move duration
+enum nodeMovementType {
+    case constantSpeed
+    case constantDuration
 }
