@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="188" height="40"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="K6j-Y3-zUe">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="K6j-Y3-zUe">
                                 <rect key="frame" x="-1.5" y="-25" width="191" height="101"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="QJW-jZ-XVr"/>
@@ -237,7 +237,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="188" height="40"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="TrP-gZ-HLG">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TrP-gZ-HLG">
                                 <rect key="frame" x="-1.5" y="-25" width="191" height="101"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="jqp-Ir-Tmh"/>

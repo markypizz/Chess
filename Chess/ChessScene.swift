@@ -81,12 +81,18 @@ class ChessScene {
     }
     
     init() {
-        let material = SCNMaterial()
+        let planeMaterial = SCNMaterial()
         
         //Set chessboard image on plane
-        material.diffuse.contents = UIImage(named: "chessboard")
+        planeMaterial.diffuse.contents = UIImage(named: "chessboard")
         
-        scene?.rootNode.childNode(withName: "plane", recursively: false)?.geometry?.materials = [material]
+        scene?.rootNode.childNode(withName: "plane", recursively: false)?.geometry?.materials = [planeMaterial]
+        
+        //Not working!--------------------------
+        let boardMaterial = SCNMaterial()
+        boardMaterial.diffuse.contents = UIImage(named: "woodtexture")
+        scene?.rootNode.childNode(withName: "board", recursively: false)?.geometry?.materials = [boardMaterial]
+        //--------------------------------------
         
         var allPieceLocations = Chess.sharedInstance.game.gameInstance.board.getLocations(of: Color.white)
         allPieceLocations += Chess.sharedInstance.game.gameInstance.board.getLocations(of: Color.black)

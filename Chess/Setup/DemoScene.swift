@@ -15,13 +15,24 @@ class DemoScene {
     let scene = SCNScene(named: "DemoScene.scn")
     
     init() {
-        let material = SCNMaterial()
+        let planeMaterial = SCNMaterial()
         
         //Set chessboard image on plane
-        material.diffuse.contents = UIImage(named: "chessboard")
+        planeMaterial.diffuse.contents = UIImage(named: "chessboard")
         
-        scene?.rootNode.childNode(withName: "plane", recursively: false)?.geometry?.materials = [material]
+        scene?.rootNode.childNode(withName: "plane", recursively: true)?.geometry?.materials = [planeMaterial]
         
-        //No BG Image
+        let rotation = SCNAction.rotate(by: 2.5, around: SCNVector3(0.0, 1.0, 0.0), duration: 15)
+        
+        let repeater = SCNAction.repeatForever(rotation)
+        scene?.rootNode.childNode(withName: "board", recursively: false)!.runAction(repeater)
+        
+        //Not Working!--------------------------
+        let boardMaterial = SCNMaterial()
+        boardMaterial.diffuse.contents = UIImage(named: "woodtexture")
+        let board = scene?.rootNode.childNode(withName: "board", recursively: false)!
+        
+        board!.geometry?.materials = [boardMaterial]
+        //--------------------------------------
     }
 }
