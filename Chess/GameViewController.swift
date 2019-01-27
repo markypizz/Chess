@@ -30,7 +30,6 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         
         recognizer = UITapGestureRecognizer(target: self, action: #selector(self.tapped(rec:)))
         
-        //sceneView.scene = chessScene
         sceneView.addGestureRecognizer(recognizer)
         
         loadingView = UIView()

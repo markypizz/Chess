@@ -23,6 +23,8 @@ class Chess {
     var game : ChessGame!
     var scene : ChessScene!
     
+    var demoScene : DemoScene?
+    
     static var sharedInstance = Chess()
     
     init() {}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O6V-Up-3WY">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -10,16 +10,68 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--White Difficulty Popover View Controller-->
+        <scene sceneID="L8J-UK-g9I">
+            <objects>
+                <viewController id="36p-n8-B8J" userLabel="White Difficulty Popover View Controller" customClass="PopoverDifficultyViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4FK-mP-9JP">
+                        <rect key="frame" x="0.0" y="0.0" width="191" height="29"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="yIx-yG-vcd"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="191" height="29"/>
+                    <size key="freeformSize" width="191" height="29"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rkg-wQ-48M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10.869565217391305" y="36.495535714285715"/>
+        </scene>
+        <!--Black Difficulty Popover View Controller-->
+        <scene sceneID="xxA-6c-SQi">
+            <objects>
+                <viewController id="awQ-P9-6SK" userLabel="Black Difficulty Popover View Controller" customClass="PopoverDifficultyViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2UG-aL-IVs">
+                        <rect key="frame" x="0.0" y="0.0" width="191" height="29"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="K6j-Y3-zUe">
+                                <rect key="frame" x="0.0" y="5.5" width="191" height="29"/>
+                                <segments>
+                                    <segment title="Easy"/>
+                                    <segment title="Medium"/>
+                                    <segment title="Hard"/>
+                                </segments>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="K6j-Y3-zUe" firstAttribute="centerY" secondItem="Jf6-uU-b2D" secondAttribute="centerY" id="F8l-kD-dTN"/>
+                            <constraint firstItem="K6j-Y3-zUe" firstAttribute="centerX" secondItem="Jf6-uU-b2D" secondAttribute="centerX" id="YdA-Qy-zvA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Jf6-uU-b2D"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="191" height="29"/>
+                    <size key="freeformSize" width="191" height="29"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VlN-jw-ix9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="11" y="205"/>
+        </scene>
         <!--Setup View Controller-->
         <scene sceneID="UMn-Ew-0Pa">
             <objects>
                 <viewController id="O6V-Up-3WY" userLabel="Setup View Controller" customClass="SetupViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GMm-yQ-ikM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="DemoScene.scn" translatesAutoresizingMaskIntoConstraints="NO" id="6KF-GC-wby">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </sceneKitView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhB-td-GD2">
-                                <rect key="frame" x="142.5" y="598" width="90" height="49"/>
+                                <rect key="frame" x="162" y="793" width="90" height="49"/>
                                 <color key="backgroundColor" red="0.2001308692893401" green="0.2001308692893401" blue="0.2001308692893401" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="dKb-Cn-knB"/>
@@ -31,7 +83,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yqh-HH-aQf">
-                                <rect key="frame" x="36" y="283" width="303" height="121"/>
+                                <rect key="frame" x="55.5" y="392.5" width="303" height="121"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="sxc-cX-JAs">
                                         <rect key="frame" x="10" y="10" width="283" height="101"/>
@@ -65,6 +117,9 @@
                                                             <segment title="AI"/>
                                                         </segments>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <connections>
+                                                            <action selector="selectedWhitePlayer:" destination="O6V-Up-3WY" eventType="valueChanged" id="cAH-EY-8jC"/>
+                                                        </connections>
                                                     </segmentedControl>
                                                     <segmentedControl opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="h4C-Ff-FzS">
                                                         <rect key="frame" x="0.0" y="63" width="100" height="29"/>
@@ -73,6 +128,9 @@
                                                             <segment title="AI"/>
                                                         </segments>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <connections>
+                                                            <action selector="selectedBlackPlayer:" destination="O6V-Up-3WY" eventType="valueChanged" id="cWJ-5M-ohg"/>
+                                                        </connections>
                                                     </segmentedControl>
                                                 </subviews>
                                                 <constraints>
@@ -92,7 +150,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Setup" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUX-by-iEL">
-                                <rect key="frame" x="71" y="20" width="233" height="53"/>
+                                <rect key="frame" x="90.5" y="44" width="233" height="53"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="44"/>
                                 <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -101,11 +159,15 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="iUX-by-iEL" firstAttribute="top" secondItem="iSZ-9n-SIs" secondAttribute="top" id="2fV-fI-yGW"/>
+                            <constraint firstAttribute="bottom" secondItem="6KF-GC-wby" secondAttribute="bottom" id="A0L-g3-xSj"/>
+                            <constraint firstItem="6KF-GC-wby" firstAttribute="leading" secondItem="iSZ-9n-SIs" secondAttribute="leading" id="D0D-b8-lxY"/>
                             <constraint firstItem="dhB-td-GD2" firstAttribute="centerX" secondItem="iSZ-9n-SIs" secondAttribute="centerX" id="HEx-43-S1X"/>
                             <constraint firstItem="yqh-HH-aQf" firstAttribute="centerY" secondItem="iSZ-9n-SIs" secondAttribute="centerY" id="Oxu-xT-9KU"/>
                             <constraint firstItem="iUX-by-iEL" firstAttribute="centerX" secondItem="iSZ-9n-SIs" secondAttribute="centerX" id="RZ7-Qq-LOF"/>
+                            <constraint firstAttribute="top" secondItem="6KF-GC-wby" secondAttribute="top" id="Uju-FA-V9e"/>
                             <constraint firstItem="yqh-HH-aQf" firstAttribute="centerX" secondItem="iSZ-9n-SIs" secondAttribute="centerX" id="hG1-ja-LyA"/>
                             <constraint firstItem="iSZ-9n-SIs" firstAttribute="bottom" secondItem="dhB-td-GD2" secondAttribute="bottom" constant="20" id="oFx-w3-BNt"/>
+                            <constraint firstItem="iSZ-9n-SIs" firstAttribute="trailing" secondItem="6KF-GC-wby" secondAttribute="trailing" id="pcB-Jg-wJe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iSZ-9n-SIs"/>
                     </view>
@@ -113,30 +175,37 @@
                     <connections>
                         <outlet property="beginButton" destination="dhB-td-GD2" id="MLS-Ku-Omz"/>
                         <outlet property="blackSegmentedControl" destination="h4C-Ff-FzS" id="75m-Rx-xHq"/>
+                        <outlet property="demoSceneView" destination="6KF-GC-wby" id="C4P-FX-99D"/>
                         <outlet property="optionsView" destination="yqh-HH-aQf" id="fmA-zh-X3Z"/>
                         <outlet property="whiteSegmentedControl" destination="Ahj-o8-M82" id="uiu-WE-BEd"/>
+                        <segue destination="36p-n8-B8J" kind="popoverPresentation" identifier="whiteDiffSegue" popoverAnchorView="zvM-Ap-63I" id="Iqz-Wl-f0F">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
+                        <segue destination="awQ-P9-6SK" kind="popoverPresentation" identifier="blackDiffSegue" popoverAnchorView="wfc-si-CSe" id="dpf-Bj-mhr">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VoB-hr-sbM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-186" y="110"/>
+            <point key="canvasLocation" x="-554" y="121"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
                 <viewController storyboardIdentifier="chessView" id="BV1-FR-VrT" customClass="GameViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="371-rT-JJZ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                             </sceneKitView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crd-4l-KKg" userLabel="Bottom Bar View">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WPy-3n-8kx">
-                                        <rect key="frame" x="163" y="9.5" width="51" height="31"/>
+                                        <rect key="frame" x="182.5" y="9.5" width="51" height="31"/>
                                         <connections>
                                             <action selector="cameraLockSwitched:" destination="BV1-FR-VrT" eventType="valueChanged" id="LHG-GA-0v0"/>
                                         </connections>
@@ -156,7 +225,6 @@
                             <constraint firstItem="371-rT-JJZ" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="5Um-f8-s3w"/>
                             <constraint firstItem="crd-4l-KKg" firstAttribute="bottom" secondItem="4qk-I5-YsI" secondAttribute="bottom" id="8JX-Pc-q43"/>
                             <constraint firstItem="371-rT-JJZ" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="M9i-ka-ypI"/>
-                            <constraint firstItem="crd-4l-KKg" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="bottom" constant="-50" id="d3J-8A-uFx"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="371-rT-JJZ" secondAttribute="trailing" id="nMb-c1-HtW"/>
                             <constraint firstItem="crd-4l-KKg" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="nRI-Y0-pb3"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="bottom" secondItem="371-rT-JJZ" secondAttribute="bottom" id="wAb-xJ-reM"/>
@@ -170,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="669.60000000000002" y="110.19490254872565"/>
+            <point key="canvasLocation" x="578" y="121"/>
         </scene>
     </scenes>
 </document>

@@ -14,15 +14,15 @@ class ChessGame : GameDelegate {
     var whitePlayer : Player
     var blackPlayer : Player
     
-    init(white: PlayerType, black: PlayerType) {
+    init(white: PlayerType, whiteDifficulty : AIConfiguration.Difficulty, black: PlayerType, blackDifficulty : AIConfiguration.Difficulty) {
         if (white == .ai) {
-            whitePlayer = AIPlayer(color: .white, configuration: AIConfiguration(difficulty: .medium))
+            whitePlayer = AIPlayer(color: .white, configuration: AIConfiguration(difficulty: whiteDifficulty))
         } else {
             whitePlayer = Human(color: .white)
         }
         
         if (black == .ai) {
-            blackPlayer = AIPlayer(color: .black, configuration: AIConfiguration(difficulty: .medium))
+            blackPlayer = AIPlayer(color: .black, configuration: AIConfiguration(difficulty: blackDifficulty))
         } else {
             blackPlayer = Human(color: .black)
         }
