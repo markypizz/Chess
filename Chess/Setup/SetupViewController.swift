@@ -15,7 +15,8 @@ enum LoadError : Error {
     case runtimeError(String)
 }
 
-class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverPresentationControllerDelegate {
+class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverPresentationControllerDelegate, BlackDifficultyDelegate, WhiteDifficultyDelegate {
+    
     var gameView : GameViewController!
     
     @IBOutlet weak var optionsView: UIView!
@@ -83,8 +84,14 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
             let popoverViewController = segue.destination as! PopoverDifficultyViewController
             popoverViewController.popoverPresentationController?.backgroundColor = #colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
             popoverViewController.modalPresentationStyle = UIModalPresentationStyle.popover
-            popoverViewController.popoverPresentationController!.delegate = self
             popoverViewController.popoverPresentationController?.sourceRect = whiteSegmentedControl.bounds
+            popoverViewController.popoverPresentationController!.delegate = self
+            
+            if (segue.identifier == "whiteDiffSegue") {
+                popoverViewController.whiteDelegate = self
+            } else {
+                popoverViewController.blackDelegate = self
+            }
         }
     }
     
@@ -92,8 +99,6 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         return UIModalPresentationStyle.none
         
     }
-    
-    
     
     func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
         
@@ -117,7 +122,17 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     
     @IBAction func selectedBlackPlayer(_ sender: UISegmentedControl) {
         
-        self.performSegue(withIdentifier: "blackDiffSegue", sender: self)
+        if sender.selectedSegmentIndex == 1 {
+            self.performSegue(withIdentifier: "blackDiffSegue", sender: self)
+        }
+    }
+    
+    func setBlackDifficulty(level: Int) {
+        blackDiff = level
+    }
+    
+    func setWhiteDifficulty(level: Int) {
+        whiteDiff = level
     }
     
 }

@@ -8,12 +8,37 @@
 
 import UIKit
 
-class PopoverDifficultyViewController: UIViewController {
+protocol WhiteDifficultyDelegate {
+    func setWhiteDifficulty(level: Int)
+}
 
+protocol BlackDifficultyDelegate {
+    func setBlackDifficulty(level: Int)
+}
+
+class PopoverDifficultyViewController: UIViewController {
+    var whiteDelegate : WhiteDifficultyDelegate?
+    var blackDelegate : BlackDifficultyDelegate?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func difficultyChanged(_ sender: UISegmentedControl) {
+        
+        if (whiteDelegate != nil) {
+            whiteDelegate?.setWhiteDifficulty(level: sender.selectedSegmentIndex)
+        } else if (blackDelegate != nil) {
+            blackDelegate?.setBlackDifficulty(level: sender.selectedSegmentIndex)
+        } else {
+            print("No delegate set")
+        }
+        
+        //A cardinal sin, dismissing a view controller from itself. However, I haven't been able to figure out how to dismiss it from SetupViewController using the delegate protocols. Something unique about UIPopoverViewControllers I have not figured out
+        dismiss(animated: true, completion: nil)
     }
     
 
