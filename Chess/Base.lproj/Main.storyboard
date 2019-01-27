@@ -10,33 +10,19 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--White Difficulty Popover View Controller-->
-        <scene sceneID="L8J-UK-g9I">
-            <objects>
-                <viewController id="36p-n8-B8J" userLabel="White Difficulty Popover View Controller" customClass="PopoverDifficultyViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4FK-mP-9JP">
-                        <rect key="frame" x="0.0" y="0.0" width="191" height="29"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="yIx-yG-vcd"/>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="191" height="29"/>
-                    <size key="freeformSize" width="191" height="29"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rkg-wQ-48M" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="10.869565217391305" y="36.495535714285715"/>
-        </scene>
         <!--Black Difficulty Popover View Controller-->
         <scene sceneID="xxA-6c-SQi">
             <objects>
                 <viewController id="awQ-P9-6SK" userLabel="Black Difficulty Popover View Controller" customClass="PopoverDifficultyViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2UG-aL-IVs">
-                        <rect key="frame" x="0.0" y="0.0" width="191" height="29"/>
+                        <rect key="frame" x="0.0" y="0.0" width="188" height="40"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="K6j-Y3-zUe">
-                                <rect key="frame" x="0.0" y="5.5" width="191" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="K6j-Y3-zUe">
+                                <rect key="frame" x="-1.5" y="-25" width="191" height="101"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="QJW-jZ-XVr"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Easy"/>
                                     <segment title="Medium"/>
@@ -45,15 +31,15 @@
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             </segmentedControl>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="K6j-Y3-zUe" firstAttribute="centerY" secondItem="Jf6-uU-b2D" secondAttribute="centerY" id="F8l-kD-dTN"/>
                             <constraint firstItem="K6j-Y3-zUe" firstAttribute="centerX" secondItem="Jf6-uU-b2D" secondAttribute="centerX" id="YdA-Qy-zvA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Jf6-uU-b2D"/>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="191" height="29"/>
-                    <size key="freeformSize" width="191" height="29"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="188" height="40"/>
+                    <size key="freeformSize" width="188" height="40"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VlN-jw-ix9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -178,11 +164,11 @@
                         <outlet property="demoSceneView" destination="6KF-GC-wby" id="C4P-FX-99D"/>
                         <outlet property="optionsView" destination="yqh-HH-aQf" id="fmA-zh-X3Z"/>
                         <outlet property="whiteSegmentedControl" destination="Ahj-o8-M82" id="uiu-WE-BEd"/>
-                        <segue destination="36p-n8-B8J" kind="popoverPresentation" identifier="whiteDiffSegue" popoverAnchorView="zvM-Ap-63I" id="Iqz-Wl-f0F">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        <segue destination="awQ-P9-6SK" kind="popoverPresentation" identifier="blackDiffSegue" popoverAnchorView="h4C-Ff-FzS" id="dpf-Bj-mhr">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
                         </segue>
-                        <segue destination="awQ-P9-6SK" kind="popoverPresentation" identifier="blackDiffSegue" popoverAnchorView="wfc-si-CSe" id="dpf-Bj-mhr">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        <segue destination="fyh-6f-sML" kind="popoverPresentation" identifier="whiteDiffSegue" popoverAnchorView="Ahj-o8-M82" id="Rkf-47-uhN">
+                            <popoverArrowDirection key="popoverArrowDirection" down="YES"/>
                         </segue>
                     </connections>
                 </viewController>
@@ -239,6 +225,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="578" y="121"/>
+        </scene>
+        <!--White Difficulty Popover View Controller-->
+        <scene sceneID="uSD-VO-ZhH">
+            <objects>
+                <viewController id="fyh-6f-sML" userLabel="White Difficulty Popover View Controller" customClass="PopoverDifficultyViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GGj-rr-zi9">
+                        <rect key="frame" x="0.0" y="0.0" width="188" height="40"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="TrP-gZ-HLG">
+                                <rect key="frame" x="-1.5" y="-25" width="191" height="101"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="jqp-Ir-Tmh"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Easy"/>
+                                    <segment title="Medium"/>
+                                    <segment title="Hard"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="TrP-gZ-HLG" firstAttribute="centerY" secondItem="Onq-Kr-FAc" secondAttribute="centerY" id="Jaa-5a-Ak5"/>
+                            <constraint firstItem="TrP-gZ-HLG" firstAttribute="centerX" secondItem="Onq-Kr-FAc" secondAttribute="centerX" id="gHh-Hf-USr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Onq-Kr-FAc"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="188" height="40"/>
+                    <size key="freeformSize" width="188" height="40"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kNf-A2-hl8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10" y="41"/>
         </scene>
     </scenes>
 </document>

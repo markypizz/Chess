@@ -44,7 +44,8 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         
         self.demoSceneView.addSubview(loadingView!)
         
-        // Do any additional setup after loading the view.
+        //AI popover color to match segmented control
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -80,14 +81,16 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         if (segue.identifier == "whiteDiffSegue" || segue.identifier == "blackDiffSegue") {
             
             let popoverViewController = segue.destination as! PopoverDifficultyViewController
-            //popoverViewController.delegate = self
+            popoverViewController.popoverPresentationController?.backgroundColor = #colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
             popoverViewController.modalPresentationStyle = UIModalPresentationStyle.popover
             popoverViewController.popoverPresentationController!.delegate = self
+            popoverViewController.popoverPresentationController?.sourceRect = whiteSegmentedControl.bounds
         }
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
+        
     }
     
     
