@@ -116,6 +116,7 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     @IBAction func selectedWhitePlayer(_ sender: UISegmentedControl) {
         
         if sender.selectedSegmentIndex == 1 {
+            whiteDiff = 0
             self.performSegue(withIdentifier: "whiteDiffSegue", sender: self)
         }
     }
@@ -123,6 +124,7 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     @IBAction func selectedBlackPlayer(_ sender: UISegmentedControl) {
         
         if sender.selectedSegmentIndex == 1 {
+            blackDiff = 0
             self.performSegue(withIdentifier: "blackDiffSegue", sender: self)
         }
     }

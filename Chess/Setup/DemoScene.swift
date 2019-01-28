@@ -29,8 +29,10 @@ class DemoScene {
         
         //Not Working!--------------------------
         let boardMaterial = SCNMaterial()
-        boardMaterial.diffuse.contents = UIImage(named: "woodtexture")
-        let board = scene?.rootNode.childNode(withName: "board", recursively: false)!
+        boardMaterial.diffuse.contents = UIImage(named: "woodtile")
+        //boardMaterial.blendMode = .
+        let board =
+        scene?.rootNode.childNode(withName: "board", recursively: false)!
         
         board!.geometry?.materials = [boardMaterial]
         //--------------------------------------

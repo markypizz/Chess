@@ -72,6 +72,18 @@ class ChessGame : GameDelegate {
     }
     
     func gameDidRemovePiece(game: Game, piece: Piece, location: BoardLocation) {
+        //This function is called after the piece has been physically replaced on the board, so trying to remove the SCNNode with the provided location does not work. As a result, the code to remove the nodes has been placed in ChessScene.moveNode(...)
+        
+        //I would go and reverse this in SwiftChess (make removals BEFORE movement), but I don't wish to edit an existing API in the case that someone who uses my code in the future attempts to build the project with the original SwiftChess pod, thus breaking my node removal/movement functionality.
+        
+        //So, this function only handles a case of en passant capture:
+        
+        //Hindsight 20/20: it may have been better off to map SCNNodes to Piece objects rather than just locations. May look into this going forward if the change is not substantial.
+        
+        if (piece.canBeTakenByEnPassant && piece.color != Chess.sharedInstance.game.gameInstance.board.getPiece(at: location)?.color) {
+            Chess.sharedInstance.scene.removePieceFromBoard(Chess.sharedInstance.scene.pieceAtLocation(location)!)
+        }
+        
         print("gameremovedPiece")
     }
     
@@ -88,7 +100,9 @@ class ChessGame : GameDelegate {
     }
     
     func promotedTypeForPawn(location: BoardLocation, player: Human, possiblePromotions: [Piece.PieceType], callback: @escaping (Piece.PieceType) -> Void) {
-        //
+        
+        //For now always queen
+        //return Piece.PieceType.queen
     }
 }
 

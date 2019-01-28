@@ -90,7 +90,7 @@ class ChessScene {
         
         //Not working!--------------------------
         let boardMaterial = SCNMaterial()
-        boardMaterial.diffuse.contents = UIImage(named: "woodtexture")
+        boardMaterial.diffuse.contents = UIImage(named: "woodtile")
         scene?.rootNode.childNode(withName: "board", recursively: false)?.geometry?.materials = [boardMaterial]
         //--------------------------------------
         
