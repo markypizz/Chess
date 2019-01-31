@@ -19,11 +19,13 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     
     var gameView : GameViewController!
     
-    @IBOutlet weak var optionsView: UIView!
+    @IBOutlet weak var playerConfigView: UIView!
     @IBOutlet weak var beginButton: UIButton!
     @IBOutlet weak var whiteSegmentedControl: UISegmentedControl!
     @IBOutlet weak var blackSegmentedControl: UISegmentedControl!
     @IBOutlet weak var demoSceneView: SCNView!
+    
+    @IBOutlet weak var optionsContainerView: UIView!
     
     var loadingView : UIView?
     var whiteDiff : Int = 0
@@ -33,26 +35,34 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         super.viewDidLoad()
         
         beginButton.layer.cornerRadius = 8.0
-        optionsView.layer.cornerRadius = 8.0
-        
-        Chess.sharedInstance.demoScene = DemoScene()
-        demoSceneView.scene = Chess.sharedInstance.demoScene?.scene
-        
-        demoSceneView.delegate = self
+        playerConfigView.layer.cornerRadius = 8.0
         
         loadingView = UIView()
         loadingView?.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
         self.demoSceneView.addSubview(loadingView!)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        //AI popover color to match segmented control
+        Chess.sharedInstance.demoScene = DemoScene()
+        demoSceneView.scene = Chess.sharedInstance.demoScene?.scene
         
+        demoSceneView.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
         if (loadingView != nil) {
             loadingView?.frame = demoSceneView.frame
-            //print(demoSceneView.frame)
+        }
+        
+        if optionsContainerView.isHidden {
+           
+            //Keep offscreen
+            optionsContainerView.frame.origin.y = self.view.bounds.height
+        } else {
+            optionsContainerView.frame.origin.y = self.view.bounds.height - optionsContainerView.bounds.height
         }
     }
     
@@ -103,13 +113,15 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
         
         if self.loadingView != nil {
-            UIView.animate(withDuration: 3, animations: {
-                self.loadingView!.alpha = 0
-            }) { (completed) in
-                self.loadingView = nil
-                Chess.sharedInstance.demoScene = nil
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 3, animations: {
+                    self.loadingView!.alpha = 0
+                }) { (completed) in
+                    self.loadingView = nil
+                    Chess.sharedInstance.demoScene = nil
+                }
+                self.demoSceneView.delegate = nil
             }
-            self.demoSceneView.delegate = nil
         }
     }
     
@@ -136,5 +148,15 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     func setWhiteDifficulty(level: Int) {
         whiteDiff = level
     }
+    
+    @IBAction func optionsButtonPressed(_ sender: Any) {
+        optionsContainerView.isHidden = false
+        UIView.animate(withDuration: 0.2) {
+            self.optionsContainerView.frame.origin.y = self.view.bounds.height - self.optionsContainerView.bounds.height
+        }
+        
+    }
+    
+    
     
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2301305B2202D72300967ABC /* BoardSelectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301305A2202D72300967ABC /* BoardSelectCollectionViewController.swift */; };
+		2301305D2202D7FC00967ABC /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301305C2202D7FC00967ABC /* BoardCollectionViewCell.swift */; };
 		231201BF21DDB18C002754D9 /* ChessGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231201BE21DDB18C002754D9 /* ChessGame.swift */; };
 		234580BD21D1EE0100CF6956 /* ChessScene.scn in Resources */ = {isa = PBXBuildFile; fileRef = 234580BC21D1EE0100CF6956 /* ChessScene.scn */; };
 		234580C421D1F13F00CF6956 /* ChessScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234580C321D1F13F00CF6956 /* ChessScene.swift */; };
@@ -37,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		1452C2AD7DDDEEAB95F093DD /* Pods-ChessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChessTests/Pods-ChessTests.release.xcconfig"; sourceTree = "<group>"; };
+		2301305A2202D72300967ABC /* BoardSelectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSelectCollectionViewController.swift; sourceTree = "<group>"; };
+		2301305C2202D7FC00967ABC /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
 		231201BE21DDB18C002754D9 /* ChessGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessGame.swift; sourceTree = "<group>"; };
 		234580BC21D1EE0100CF6956 /* ChessScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ChessScene.scn; sourceTree = "<group>"; };
 		234580C321D1F13F00CF6956 /* ChessScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -82,9 +86,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2301305E2202D80200967ABC /* Board Selection */ = {
+			isa = PBXGroup;
+			children = (
+				2301305C2202D7FC00967ABC /* BoardCollectionViewCell.swift */,
+				2301305A2202D72300967ABC /* BoardSelectCollectionViewController.swift */,
+			);
+			path = "Board Selection";
+			sourceTree = "<group>";
+		};
 		2348349A21FD1D6500BB9DF6 /* Setup */ = {
 			isa = PBXGroup;
 			children = (
+				2301305E2202D80200967ABC /* Board Selection */,
 				2348349821FD1D4C00BB9DF6 /* PopoverDifficultyViewController.swift */,
 				2348349621FD165D00BB9DF6 /* DemoScene.scn */,
 				2348349B21FD1D7000BB9DF6 /* DemoScene.swift */,
@@ -338,9 +352,11 @@
 				231201BF21DDB18C002754D9 /* ChessGame.swift in Sources */,
 				2348349C21FD1D7000BB9DF6 /* DemoScene.swift in Sources */,
 				23A9017921D9E0D400A05808 /* Chess.swift in Sources */,
+				2301305B2202D72300967ABC /* BoardSelectCollectionViewController.swift in Sources */,
 				2361C10B21D1870B004362A5 /* GameViewController.swift in Sources */,
 				2361C10321D1870B004362A5 /* AppDelegate.swift in Sources */,
 				2348349921FD1D4C00BB9DF6 /* PopoverDifficultyViewController.swift in Sources */,
+				2301305D2202D7FC00967ABC /* BoardCollectionViewCell.swift in Sources */,
 				234580C421D1F13F00CF6956 /* ChessScene.swift in Sources */,
 				2366F77121D5F58800218D09 /* SetupViewController.swift in Sources */,
 			);
