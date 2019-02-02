@@ -2,15 +2,20 @@ PODS:
   - SwiftChess (1.0)
 
 DEPENDENCIES:
-  - SwiftChess (~> 1.0)
+  - SwiftChess (from `https://github.com/markypizz/SwiftChess`)
 
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - SwiftChess
+EXTERNAL SOURCES:
+  SwiftChess:
+    :git: https://github.com/markypizz/SwiftChess
+
+CHECKOUT OPTIONS:
+  SwiftChess:
+    :commit: 2fb2df5c2bc46b09dfffef2fe05b9a28f7c13fb1
+    :git: https://github.com/markypizz/SwiftChess
 
 SPEC CHECKSUMS:
   SwiftChess: e498d292c070b89d2d14cfffcf8d1ee270e44cad
 
-PODFILE CHECKSUM: 6afbbe326f81ba898ead52ae7a8e2d04368e35f8
+PODFILE CHECKSUM: b2964ccedd60eb808996957b339f50c1d5650586
 
 COCOAPODS: 1.5.3

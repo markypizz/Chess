@@ -239,7 +239,7 @@ class ChessScene {
     
     func moveNode(from: BoardLocation, to: BoardLocation) {
         let startPiece = pieceAtLocation(from)
-        let endPiece = pieceAtLocation(to)
+        
         
         let startCoords = nodePositionFor(boardLocation: from)
         let finalCoords = nodePositionFor(boardLocation: to)
@@ -256,9 +256,7 @@ class ChessScene {
         
         startPiece?.runAction(move)
         
-        if (endPiece != nil) {
-            removePieceFromBoard(endPiece!)
-        }
+        
         
         updateLocationFor(piece: startPiece!, location: to)
     }

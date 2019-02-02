@@ -14,6 +14,11 @@ class ChessGame : GameDelegate {
     var whitePlayer : Player
     var blackPlayer : Player
     
+    var moveStart : BoardLocation?
+    var moveEnd : BoardLocation?
+    
+    var removeLocation : BoardLocation?
+    
     init(white: PlayerType, whiteDifficulty : AIConfiguration.Difficulty, black: PlayerType, blackDifficulty : AIConfiguration.Difficulty) {
         if (white == .ai) {
             whitePlayer = AIPlayer(color: .white, configuration: AIConfiguration(difficulty: whiteDifficulty))
@@ -80,15 +85,22 @@ class ChessGame : GameDelegate {
         
         //Hindsight 20/20: it may have been better off to map SCNNodes to Piece objects rather than just locations. May look into this going forward if the change is not substantial.
         
-        if (piece.canBeTakenByEnPassant && piece.color != Chess.sharedInstance.game.gameInstance.board.getPiece(at: location)?.color) {
-            Chess.sharedInstance.scene.removePieceFromBoard(Chess.sharedInstance.scene.pieceAtLocation(location)!)
-        }
+//        if (piece.canBeTakenByEnPassant && piece.color != Chess.sharedInstance.game.gameInstance.board.getPiece(at: location)?.color) {
+//
+//            if (location != piece.location) {
+//                Chess.sharedInstance.scene.removePieceFromBoard(Chess.sharedInstance.scene.pieceAtLocation(location)!)
+//            }
+//        }
         
+        removeLocation = location
         print("gameremovedPiece")
     }
     
     func gameDidMovePiece(game: Game, piece: Piece, toLocation: BoardLocation) {
-        Chess.sharedInstance.scene.moveNode(from: piece.location, to: toLocation)
+        moveStart = piece.location
+        moveEnd = toLocation
+        
+        //Chess.sharedInstance.scene.moveNode(from: piece.location, to: toLocation)
     }
     
     func gameDidTransformPiece(game: Game, piece: Piece, location: BoardLocation) {
@@ -96,7 +108,27 @@ class ChessGame : GameDelegate {
     }
     
     func gameDidEndUpdates(game: Game) {
-        print("gameEndUpdates")
+        
+        //Remove a node
+        if (removeLocation != nil) {
+            //Remove the piece
+            
+            if let endPiece = Chess.sharedInstance.scene.pieceAtLocation(removeLocation!) {
+                Chess.sharedInstance.scene.removePieceFromBoard(endPiece)
+                removeLocation = nil
+            }
+            
+        }
+        
+        //Move a node
+        
+        if (moveStart != nil && moveEnd != nil) {
+            Chess.sharedInstance.scene.moveNode(from: moveStart!, to: moveEnd!)
+            moveStart = nil
+            moveEnd = nil
+        } else {
+            print("No piece movement on previous turn.")
+        }
     }
     
     func promotedTypeForPawn(location: BoardLocation, player: Human, possiblePromotions: [Piece.PieceType], callback: @escaping (Piece.PieceType) -> Void) {

@@ -33,4 +33,5 @@ class Chess {
 
 enum ChessError : Error {
     case humanMoveRequestedOnNonHumanTurn
+    case noMoveOcurredOnTurn
 }

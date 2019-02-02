@@ -6,7 +6,7 @@ target 'Chess' do
   use_frameworks!
 
   # Pods for Chess
-  pod 'SwiftChess', '~> 1.0'
+  pod 'SwiftChess', :git => 'https://github.com/markypizz/SwiftChess'
 
   target 'ChessTests' do
     inherit! :search_paths
