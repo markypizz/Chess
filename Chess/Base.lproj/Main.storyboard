@@ -52,7 +52,7 @@
         <scene sceneID="UMn-Ew-0Pa">
             <objects>
                 <viewController id="O6V-Up-3WY" userLabel="Setup View Controller" customClass="SetupViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="GMm-yQ-ikM">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="GMm-yQ-ikM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -291,10 +291,10 @@
             </objects>
             <point key="canvasLocation" x="10" y="41"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Board Select Collection View Controller-->
         <scene sceneID="yWk-8Q-yg6">
             <objects>
-                <collectionViewController id="7vK-7i-nmo" sceneMemberID="viewController">
+                <collectionViewController id="7vK-7i-nmo" customClass="BoardSelectCollectionViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Qfg-od-ezR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -306,27 +306,40 @@
                             <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="boardCell" id="RpK-Yh-yb1" customClass="BoardCollectionViewCell" customModule="Chess" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="boardCell" id="RpK-Yh-yb1" customClass="BoardCollectionViewCell" customModule="Chess" customModuleProvider="target">
                                 <rect key="frame" x="10" y="10" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mUK-Mb-rgm">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VHx-JE-1td" userLabel="SelectedView">
+                                            <rect key="frame" x="0.0" y="-50" width="100" height="100"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="100" id="0H7-lb-BeA"/>
+                                                <constraint firstAttribute="width" constant="100" id="BUM-0Z-pyw"/>
+                                            </constraints>
+                                        </view>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TH9-Pk-thv">
+                                            <rect key="frame" x="2.5" y="-47.5" width="95" height="95"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="95" id="6DK-Vq-qfw"/>
+                                                <constraint firstAttribute="height" constant="95" id="iu1-Ur-BOp"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="mUK-Mb-rgm" secondAttribute="bottom" id="HXN-hj-xxA"/>
-                                    <constraint firstItem="mUK-Mb-rgm" firstAttribute="top" secondItem="RpK-Yh-yb1" secondAttribute="top" id="Ocs-7j-jrX"/>
-                                    <constraint firstAttribute="trailing" secondItem="mUK-Mb-rgm" secondAttribute="trailing" id="Twu-5k-7ol"/>
-                                    <constraint firstItem="mUK-Mb-rgm" firstAttribute="leading" secondItem="RpK-Yh-yb1" secondAttribute="leading" id="zeC-wS-vFg"/>
+                                    <constraint firstItem="VHx-JE-1td" firstAttribute="centerX" secondItem="bxq-of-Zkw" secondAttribute="centerX" id="5gI-kn-i15"/>
+                                    <constraint firstItem="TH9-Pk-thv" firstAttribute="centerX" secondItem="bxq-of-Zkw" secondAttribute="centerX" id="818-Ud-wIY"/>
+                                    <constraint firstItem="TH9-Pk-thv" firstAttribute="centerY" secondItem="bxq-of-Zkw" secondAttribute="centerY" id="G8p-Nx-cKB"/>
+                                    <constraint firstItem="VHx-JE-1td" firstAttribute="centerY" secondItem="bxq-of-Zkw" secondAttribute="centerY" id="XmU-Da-8yd"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="bxq-of-Zkw"/>
                                 <connections>
-                                    <outlet property="imageView" destination="mUK-Mb-rgm" id="Z2l-LA-djU"/>
+                                    <outlet property="imageView" destination="TH9-Pk-thv" id="6WH-Y8-9nf"/>
+                                    <outlet property="selectedView" destination="VHx-JE-1td" id="dTS-Do-w2h"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

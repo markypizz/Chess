@@ -12,21 +12,8 @@ class BoardCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var selectedView: UIView!
+    
     var imageName : String?
-    
-    
-    func setUp() {
-        
-    }
-    //
-    //
-    //
-    ///
-    //
-    //
-    ///// Do this stuff
-    ///////
-    ////////
-    //////
-    
+    var boardIndex : Int?
 }

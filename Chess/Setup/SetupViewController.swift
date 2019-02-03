@@ -24,7 +24,6 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     @IBOutlet weak var whiteSegmentedControl: UISegmentedControl!
     @IBOutlet weak var blackSegmentedControl: UISegmentedControl!
     @IBOutlet weak var demoSceneView: SCNView!
-    
     @IBOutlet weak var optionsContainerView: UIView!
     
     var loadingView : UIView?
@@ -40,13 +39,18 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         loadingView = UIView()
         loadingView?.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
+        #if !targetEnvironment(simulator)
+            demoSceneView.antialiasingMode = .multisampling4X
+        #endif
+        
         self.demoSceneView.addSubview(loadingView!)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        Chess.sharedInstance.demoScene = DemoScene()
+        Chess.sharedInstance.demoScene = DemoScene(view: self.view)
+        demoSceneView.showsStatistics = true
         demoSceneView.scene = Chess.sharedInstance.demoScene?.scene
         
         demoSceneView.delegate = self
@@ -150,13 +154,28 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     }
     
     @IBAction func optionsButtonPressed(_ sender: Any) {
+        openBoardSelectionWindow()
+    }
+    
+    //Not super efficient, acting on every touch.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !optionsContainerView.isHidden {
+            closeBoardSelectionWindow()
+        }
+    }
+    
+    func openBoardSelectionWindow() {
         optionsContainerView.isHidden = false
         UIView.animate(withDuration: 0.2) {
             self.optionsContainerView.frame.origin.y = self.view.bounds.height - self.optionsContainerView.bounds.height
         }
-        
     }
     
-    
-    
+    func closeBoardSelectionWindow() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.optionsContainerView.frame.origin.y = self.view.bounds.height
+        }) { (completed) in
+            self.optionsContainerView.isHidden = true
+        }
+    }
 }

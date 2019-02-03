@@ -84,7 +84,7 @@ class ChessScene {
         let planeMaterial = SCNMaterial()
         
         //Set chessboard image on plane
-        planeMaterial.diffuse.contents = UIImage(named: "chessboard")
+        planeMaterial.diffuse.contents = UIImage(named: "woodchessboard")
         
         scene?.rootNode.childNode(withName: "plane", recursively: false)?.geometry?.materials = [planeMaterial]
         

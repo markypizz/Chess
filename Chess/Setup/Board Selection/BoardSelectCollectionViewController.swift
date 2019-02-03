@@ -14,6 +14,11 @@ class BoardSelectCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let bgImage = UIImage(named: "brightstripeBG")!.cgImage
+            
+            self.collectionView.backgroundColor = UIColor(patternImage:
+                UIImage(cgImage: bgImage!, scale: 4, orientation: .up))
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -49,9 +54,14 @@ class BoardSelectCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BoardCollectionViewCell
-    
-        // Configure the cell
-    
+        
+        cell.boardIndex = indexPath.row
+        cell.imageName = Chess.boardChoices[cell.boardIndex!]
+        cell.imageView.image = UIImage(named: cell.imageName!)
+        
+        if (cell.boardIndex == Chess.sharedInstance.boardSelection) {
+            cell.selectedView.backgroundColor = UIColor.green
+        }
         return cell
     }
 
