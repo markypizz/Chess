@@ -18,11 +18,12 @@ class Chess {
     var game : ChessGame!
     var scene : ChessScene!
     
-    var demoScene : DemoScene?
+    var demoScene : DemoScene!
     
     static var sharedInstance = Chess()
     
-    static let boardChoices = ["woodchessboard","graychessboard","greenchessboard","jebhead"]
+    static let boardChoices = ["regularchessboard","woodchessboard","graychessboard","greenchessboard","jebhead"]
+    static let boardBodies = [String]()
     
     var boardSelection = UserDefaults.standard.integer(forKey: "boardIndex") {
         didSet {

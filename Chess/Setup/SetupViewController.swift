@@ -82,6 +82,7 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
             blackDifficulty: AIConfiguration.Difficulty(rawValue: blackDiff)!)
         
         Chess.sharedInstance.scene = ChessScene()
+        Chess.sharedInstance.demoScene = nil
         
         //Looking into a more pleasing animation
         self.modalPresentationStyle = .overFullScreen
@@ -122,7 +123,6 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
                     self.loadingView!.alpha = 0
                 }) { (completed) in
                     self.loadingView = nil
-                    Chess.sharedInstance.demoScene = nil
                 }
                 self.demoSceneView.delegate = nil
             }

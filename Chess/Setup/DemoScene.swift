@@ -21,7 +21,8 @@ class DemoScene {
         let planeMaterial = SCNMaterial()
         
         //Set chessboard image on plane
-        planeMaterial.diffuse.contents = UIImage(named: "woodchessboard")
+        planeMaterial.diffuse.contents = UIImage(named: Chess.boardChoices[
+            Chess.sharedInstance.boardSelection])
         
         scene?.rootNode.childNode(withName: "plane", recursively: true)?.geometry?.materials = [planeMaterial]
         
@@ -39,11 +40,18 @@ class DemoScene {
         scene?.rootNode.childNode(withName: "board", recursively: false)!.runAction(repeater)
         
         let boardMaterial = SCNMaterial()
-        boardMaterial.diffuse.contents = UIImage(named: "woodtile")
+        boardMaterial.diffuse.contents = UIImage(named: "marbletexture")
         
         let board =
         scene?.rootNode.childNode(withName: "board", recursively: false)!
         
         board!.geometry?.materials = [boardMaterial]
+    }
+    
+    func changeBoardTo(index : Int) {
+        Chess.sharedInstance.boardSelection = index
+        
+        scene?.rootNode.childNode(withName: "plane", recursively: true)?.geometry?.firstMaterial?.diffuse.contents = Chess.boardChoices[
+            Chess.sharedInstance.boardSelection]
     }
 }
