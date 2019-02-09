@@ -40,6 +40,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
         activityIndicatorView?.startAnimating()
         loadingView?.addSubview(activityIndicatorView!)
+        print(Chess.sharedInstance.game.gameInstance.board.printFenRepresentation())
     }
     
     override func viewDidLayoutSubviews() {

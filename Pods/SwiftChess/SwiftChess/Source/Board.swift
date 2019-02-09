@@ -628,8 +628,35 @@ public struct Board: Equatable {
                     character = "G"
                 case .pawn:
                     character = "P"
-
+                    
                 }
+            }
+            return character
+        }
+    }
+    
+    public func printFenRepresentation() -> String {
+        return printBoardFen { (square: Square) -> Character? in
+            
+            var character: Character?
+            
+            if let piece = square.piece {
+                
+                switch piece.type {
+                case .rook:
+                    character = piece.color == .white ? "R" : "r"
+                case .knight:
+                    character = piece.color == .white ? "N" : "n"
+                case .bishop:
+                    character = piece.color == .white ? "B" : "b"
+                case .queen:
+                    character = piece.color == .white ? "Q" : "q"
+                case .king:
+                    character = piece.color == .white ? "K" : "k"
+                case .pawn:
+                    character = piece.color == .white ? "P" : "p"
+                }
+                
             }
             return character
         }
@@ -678,6 +705,41 @@ public struct Board: Equatable {
         }
         
         print(printString)
+    }
+    
+    func printBoardFen( _ squarePrinter: (Square) -> Character? ) -> String {
+        
+        var printString = String()
+        var currentSpaces = 0
+        
+        for y in  (0...7).reversed() {
+            for x in 0...7 {
+                
+                let index = y*8 + x
+                let character = squarePrinter(squares[index])
+                
+                if (character != nil) {
+                    if (currentSpaces != 0) {
+                        printString.append(String(currentSpaces))
+                        currentSpaces = 0
+                    }
+                    printString.append(character!)
+                } else {
+                    currentSpaces += 1
+                }
+            }
+            
+            if (currentSpaces != 0) {
+                printString.append(String(currentSpaces))
+                currentSpaces = 0
+            }
+            
+            if (y != 0) {
+                printString.append(Character("/"))
+            }
+        }
+        
+        return printString
     }
 }
 

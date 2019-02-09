@@ -24,6 +24,7 @@ class Chess {
     
     static let boardChoices = ["regularchessboard","woodchessboard","graychessboard","greenchessboard","jebhead"]
     static let boardBodies = [String]()
+    static let boardCustomizations = ["Surface","Material"]
     
     var boardSelection = UserDefaults.standard.integer(forKey: "boardIndex") {
         didSet {

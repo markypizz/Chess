@@ -10,7 +10,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftChess:
-    :commit: 2fb2df5c2bc46b09dfffef2fe05b9a28f7c13fb1
+    :commit: bff03a666c0c1c5ba099688af3a45de8ff805b31
     :git: https://github.com/markypizz/SwiftChess
 
 SPEC CHECKSUMS:

@@ -43,7 +43,7 @@ class BoardSelectCollectionViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 1
     }
 
 
@@ -59,8 +59,11 @@ class BoardSelectCollectionViewController: UICollectionViewController {
         cell.imageName = Chess.boardChoices[cell.boardIndex!]
         cell.imageView.image = UIImage(named: cell.imageName!)
         
+        //Need to fix selected bug
         if (cell.boardIndex == Chess.sharedInstance.boardSelection) {
             cell.selectedView.backgroundColor = UIColor.green
+        } else {
+            cell.selectedView.backgroundColor = UIColor.black
         }
         return cell
     }
@@ -99,15 +102,8 @@ class BoardSelectCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let scene = Chess.sharedInstance.demoScene
         scene?.changeBoardTo(index: indexPath.row)
-        //Chess.sharedInstance.demoScene.changeBoardTo(index: indexPath.row)
         
-        let cell = collectionView.cellForItem(at: indexPath) as! BoardCollectionViewCell
-        
-        for currentCell in collectionView.visibleCells as! [BoardCollectionViewCell] {
-            currentCell.selectedView.backgroundColor = UIColor.black
-        }
-        
-        cell.selectedView.backgroundColor = UIColor.green
+        collectionView.reloadData()
     }
 
 }
