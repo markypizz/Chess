@@ -61,11 +61,12 @@ class ChessGame : GameDelegate {
     }
     
     func gameWonByPlayer(game: Game, player: Player) {
+        trySceneUpdates()
         print("gameWonByPlayer \(player)")
     }
     
     func gameEndedInStaleMate(game: Game) {
-        print("stalemate")
+        trySceneUpdates()
     }
     
     func gameWillBeginUpdates(game: Game) {
@@ -108,8 +109,26 @@ class ChessGame : GameDelegate {
     }
     
     func gameDidEndUpdates(game: Game) {
+        trySceneUpdates()
+    }
+    
+    func promotedTypeForPawn(location: BoardLocation, player: Human, possiblePromotions: [Piece.PieceType], callback: @escaping (Piece.PieceType) -> Void) {
         
+        //For now always queen
+        //return Piece.PieceType.queen
+    }
+    
+    func trySceneUpdates() {
+        do {
+            try performSceneUpdates()
+        } catch let error{
+            print(error)
+        }
+    }
+    
+    func performSceneUpdates() throws {
         //Remove a node
+        
         if (removeLocation != nil) {
             //Remove the piece
             
@@ -127,14 +146,8 @@ class ChessGame : GameDelegate {
             moveStart = nil
             moveEnd = nil
         } else {
-            print("No piece movement on previous turn.")
+            throw ChessError.noMoveOcurredOnPreviousTurn
         }
-    }
-    
-    func promotedTypeForPawn(location: BoardLocation, player: Human, possiblePromotions: [Piece.PieceType], callback: @escaping (Piece.PieceType) -> Void) {
-        
-        //For now always queen
-        //return Piece.PieceType.queen
     }
 }
 
