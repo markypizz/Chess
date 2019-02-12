@@ -14,9 +14,13 @@ class ChessGame : GameDelegate {
     var whitePlayer : Player
     var blackPlayer : Player
     
-    var moveStart : BoardLocation?
-    var moveEnd : BoardLocation?
+    struct pendingMove {
+        var moveStart : BoardLocation?
+        var moveEnd : BoardLocation?
+    }
     
+    var pendingMoves = [pendingMove]()
+
     var removeLocation : BoardLocation?
     
     init(white: PlayerType, whiteDifficulty : AIConfiguration.Difficulty, black: PlayerType, blackDifficulty : AIConfiguration.Difficulty) {
@@ -57,7 +61,18 @@ class ChessGame : GameDelegate {
         //AI will make move on its turn
         if let player = game.currentPlayer as? AIPlayer {
             player.makeMoveAsync()
-        }
+        } /* ---Uncomment to force kingside castle---
+         else {
+            if let player = game.currentPlayer as? Human {
+                if game.board.canColorCastle(color: game.currentPlayer.color, side: .kingSide) {
+                    
+                    
+                    //print("castling kingside")
+                    //player.performCastleMove(side: .kingSide)
+                }
+                
+            }
+        } */
     }
     
     func gameWonByPlayer(game: Game, player: Player) {
@@ -98,8 +113,8 @@ class ChessGame : GameDelegate {
     }
     
     func gameDidMovePiece(game: Game, piece: Piece, toLocation: BoardLocation) {
-        moveStart = piece.location
-        moveEnd = toLocation
+        
+        pendingMoves.append(pendingMove(moveStart: piece.location, moveEnd: toLocation))
         
         //Chess.sharedInstance.scene.moveNode(from: piece.location, to: toLocation)
     }
@@ -139,15 +154,11 @@ class ChessGame : GameDelegate {
             
         }
         
-        //Move a node
-        
-        if (moveStart != nil && moveEnd != nil) {
-            Chess.sharedInstance.scene.moveNode(from: moveStart!, to: moveEnd!)
-            moveStart = nil
-            moveEnd = nil
-        } else {
-            throw ChessError.noMoveOcurredOnPreviousTurn
+        //Move nodes
+        for nextMove in pendingMoves {
+            Chess.sharedInstance.scene.moveNode(from: nextMove.moveStart!, to: nextMove.moveEnd!)
         }
+        pendingMoves.removeAll()
     }
 }
 
