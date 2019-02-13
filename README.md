@@ -26,7 +26,10 @@ in the main project directory. This should download the necessary dependencies. 
 
 License
 ----
-Coming soon, there is plenty of credit I do need to give. I only claim ownership to my own code. All images, graphics, and models are public domain.
+Chess piece models are royalty free, created by Polylel from cgtrader.com  
+All images and graphics are public domain.  
+I claim ownership of my own code. All rights reserved.  
+No permission granted to sell this work or sell any modifications without permission.
 
 Other
 ----
