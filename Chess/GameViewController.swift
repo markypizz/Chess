@@ -20,6 +20,10 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     var loadingView : UIView?
     var activityIndicatorView : UIActivityIndicatorView?
     
+    var cameraYaw : SCNNode!
+    var cameraPitch : SCNNode!
+    var cameraZoom: SCNNode!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         sceneView.delegate = self
@@ -41,6 +45,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         activityIndicatorView?.startAnimating()
         loadingView?.addSubview(activityIndicatorView!)
         print(Chess.sharedInstance.game.gameInstance.board.printFenRepresentation())
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -83,32 +88,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         }
     }
     
-    func enableFreeRoam() {
-        recognizer.isEnabled = false
-        //sceneView.allowsCameraControl = true
-    }
-    
-    func disableFreeRoam() {
-        recognizer.isEnabled = true
-        //sceneView.allowsCameraControl = false
-        
-        
-        //sceneView.allowsCameraControl = false
-        //sceneView.pointOfView = chessScene.scene?.rootNode.childNode(withName: "camera", recursively: false)
-        
-        
-        //sceneView.defaultCameraController.pointOfView = chessScene.scene?.rootNode.childNode(withName: "camera", recursively: false)
-        
-        //chessScene.scene?.rootNode.camera.
-    }
-    
     @IBAction func cameraLockSwitched(_ sender: UISwitch) {
-        
-        if (sender.isOn) {
-            disableFreeRoam()
-        } else {
-            enableFreeRoam()
-        }
+        //Will be removed
     }
     
     // Upon successful scene render, remove the loading screen and start the game
@@ -116,6 +97,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         DispatchQueue.main.async {
             if self.loadingView != nil {
                 self.activityIndicatorView?.stopAnimating()
+                self.initializeCameraReferences()
                 UIView.animate(withDuration: 1, animations: {
                     self.loadingView?.alpha = 0
                 }) { (completed) in
@@ -128,5 +110,43 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
                 self.sceneView.delegate = nil
             }
         }
+    }
+    
+    func initializeCameraReferences() {
+        
+        self.cameraYaw = sceneView.scene!.rootNode.childNode(withName: "cameraYaw", recursively: false)
+        
+        self.cameraPitch = self.cameraYaw.childNode(withName: "cameraPitch", recursively: false)
+        
+        self.cameraZoom = self.cameraPitch.childNode(withName: "cameraZoom", recursively: false)
+    }
+    
+    func performCameraYaw(degrees: Float) {
+        let rotation = SCNAction.rotate(
+            by: CGFloat(GLKMathDegreesToRadians(degrees)),
+            around: SCNVector3(0,1,0),
+            duration: TimeInterval(degrees / 90.0))
+        
+        rotation.timingMode = .easeInEaseOut
+        
+        cameraYaw?.runAction(rotation)
+    }
+    
+    func performCameraPitch(degrees: CGFloat) {
+        let rotation = SCNAction.rotate(
+            by: (-1) * CGFloat(GLKMathDegreesToRadians(Float(degrees))),
+            around: SCNVector3(1,0,0),
+            duration: TimeInterval(degrees / 90.0))
+        
+        rotation.timingMode = .easeInEaseOut
+        
+        cameraPitch?.runAction(rotation)
+    }
+    
+    func performCameraZoom(amount: CGFloat) {
+        let zoom = SCNAction.move(by: SCNVector3(0,0,(-1) * amount), duration: 0.5)
+        zoom.timingMode = .easeInEaseOut
+        
+        cameraZoom?.runAction(zoom)
     }
 }
