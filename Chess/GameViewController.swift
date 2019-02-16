@@ -20,6 +20,23 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     var loadingView : UIView?
     var activityIndicatorView : UIActivityIndicatorView?
     
+    
+    //Outlets for camera control
+    @IBOutlet weak var yawRightButton: UIButton!
+    
+    @IBOutlet weak var zoomOutButton: UIButton!
+    
+    @IBOutlet weak var pitchUpButton: UIButton!
+    
+    @IBOutlet weak var pitchDownButton: UIButton!
+    
+    @IBOutlet weak var zoomInButton: UIButton!
+    
+    @IBOutlet weak var yawLeftButton: UIButton!
+    
+    
+    
+    
     var cameraYaw : SCNNode!
     var cameraPitch : SCNNode!
     var cameraZoom: SCNNode!
@@ -121,11 +138,47 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         self.cameraZoom = self.cameraPitch.childNode(withName: "cameraZoom", recursively: false)
     }
     
+    @IBAction func yawRightButtonPressed(_ sender: UIButton) {
+        performCameraYaw(degrees: 45.0/2)
+    }
+    
+    @IBAction func zoomOutButtonPressed(_ sender: UIButton) {
+        performCameraZoom(amount: -2.0)
+        
+        if (cameraZoom.position.z >= 40.0) {
+            zoomOutButton.isEnabled = false
+        }
+        
+        zoomInButton.isEnabled = true
+    }
+    
+    @IBAction func pitchUpButtonPressed(_ sender: UIButton) {
+        performCameraPitch(degrees: 15)
+    }
+    
+    @IBAction func pitchDownButtonPressed(_ sender: UIButton) {
+        performCameraPitch(degrees: -15)
+    }
+    
+    @IBAction func zoomInButtonPressed(_ sender: UIButton) {
+        performCameraZoom(amount: 2.0)
+        
+        if cameraZoom.position.z <= 6.0 {
+            zoomInButton.isEnabled = false
+        }
+        
+        zoomOutButton.isEnabled = true
+    }
+    
+    @IBAction func yawLeftButtonPressed(_ sender: UIButton) {
+        performCameraYaw(degrees: -45.0/2)
+    }
+    
     func performCameraYaw(degrees: Float) {
         let rotation = SCNAction.rotate(
             by: CGFloat(GLKMathDegreesToRadians(degrees)),
             around: SCNVector3(0,1,0),
-            duration: TimeInterval(degrees / 90.0))
+            duration: TimeInterval(abs(degrees) / 90.0))
         
         rotation.timingMode = .easeInEaseOut
         
@@ -136,15 +189,23 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         let rotation = SCNAction.rotate(
             by: (-1) * CGFloat(GLKMathDegreesToRadians(Float(degrees))),
             around: SCNVector3(1,0,0),
-            duration: TimeInterval(degrees / 90.0))
+            duration: TimeInterval(abs(degrees) / 90.0))
         
         rotation.timingMode = .easeInEaseOut
         
         cameraPitch?.runAction(rotation)
+        
+        if (cameraPitch.rotation.x >= 0) {
+            pitchDownButton.isEnabled = false
+            pitchUpButton.isEnabled = true
+        } else if (cameraPitch.rotation.x <= -90) {
+            pitchUpButton.isEnabled = false
+            pitchDownButton.isEnabled = true
+        }
     }
     
     func performCameraZoom(amount: CGFloat) {
-        let zoom = SCNAction.move(by: SCNVector3(0,0,(-1) * amount), duration: 0.5)
+        let zoom = SCNAction.move(by: SCNVector3(0,0,(-1) * amount), duration: 0.2)
         zoom.timingMode = .easeInEaseOut
         
         cameraZoom?.runAction(zoom)

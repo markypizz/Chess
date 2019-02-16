@@ -34,9 +34,7 @@ class ChessScene {
             //Highlight board piece on location, clear last highlight
             
             guard firstTappedLocation != nil else {
-                //clear glow
-                //
-                //
+                unhighlight(node: highlightedPiece)
                 return
             }
             
@@ -44,8 +42,11 @@ class ChessScene {
                 //Piece found
                 
                 //Highlight piece
-                highlight(node: piece)
-                highlightedPiece = piece
+                
+                if highlightedPiece != piece {
+                    unhighlight(node: highlightedPiece)
+                    highlight(node: piece)
+                } // Else, the node is already highlighted
             }
         }
     }
@@ -53,7 +54,6 @@ class ChessScene {
     var secondTappedLocation : BoardLocation? {
         didSet {
             if secondTappedLocation != nil {
-                
                 //If tapped same position twice, negate the second tap
                 guard secondTappedLocation != firstTappedLocation else {
                     secondTappedLocation = nil
@@ -72,6 +72,8 @@ class ChessScene {
                 } catch {
                     print(error)
                 }
+                
+                unhighlight(node: highlightedPiece)
                 
                 //Deselect after move attempt (or user attempted to clear selection)
                 firstTappedLocation = nil
@@ -229,11 +231,20 @@ class ChessScene {
     
     // TODO: Finish
     func highlight(node: SCNNode) {
-        //let technique = SCNTechnique.init(bySequencingTechniques: )
+        let bloomFilter = CIFilter(name:"CIBloom")!
+        bloomFilter.setValue(10.0, forKey: "inputIntensity")
+        bloomFilter.setValue(3.0, forKey: "inputRadius")
+        
+        node.filters = [bloomFilter]
+        
+        highlightedPiece = node
     }
     
-    func unhighlight(node : SCNNode) {
-        
+    func unhighlight(node : SCNNode?) {
+        highlightedPiece = nil
+        if node != nil {
+            node!.filters = []
+        }
     }
     
     func moveNode(from: BoardLocation, to: BoardLocation) {
