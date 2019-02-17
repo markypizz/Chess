@@ -22,6 +22,9 @@ class Chess {
     
     static var sharedInstance = Chess()
     
+    init() {}
+    
+    // Static global constants
     static let boardChoices = ["regularchessboard","woodchessboard","graychessboard","greenchessboard","jebhead"]
     static let boardBodies = [String]()
     static let boardCustomizations = ["Surface","Material"]
@@ -37,7 +40,6 @@ class Chess {
     //Mostly used for debugging purposes
     static let chessColumnsToLetter : [Int:String] = [1:"A",2:"B",3:"C",4:"D",5:"E",6:"F",7:"G",8:"H"]
     
-    init() {}
 }
 
 enum ChessError : Error {

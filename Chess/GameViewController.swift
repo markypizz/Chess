@@ -34,12 +34,13 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     
     @IBOutlet weak var yawLeftButton: UIButton!
     
-    
-    
-    
     var cameraYaw : SCNNode!
     var cameraPitch : SCNNode!
     var cameraZoom: SCNNode!
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,10 +83,6 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         } else {
             return .all
         }
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
     }
     
     @objc func tapped(rec: UITapGestureRecognizer) {
@@ -194,14 +191,6 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         rotation.timingMode = .easeInEaseOut
         
         cameraPitch?.runAction(rotation)
-        
-        if (cameraPitch.rotation.x >= 0) {
-            pitchDownButton.isEnabled = false
-            pitchUpButton.isEnabled = true
-        } else if (cameraPitch.rotation.x <= -90) {
-            pitchUpButton.isEnabled = false
-            pitchDownButton.isEnabled = true
-        }
     }
     
     func performCameraZoom(amount: CGFloat) {

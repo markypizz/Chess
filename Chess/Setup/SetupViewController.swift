@@ -20,7 +20,6 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     var gameView : GameViewController!
     
     @IBOutlet weak var playerConfigView: UIView!
-    @IBOutlet weak var beginButton: UIButton!
     @IBOutlet weak var whiteSegmentedControl: UISegmentedControl!
     @IBOutlet weak var blackSegmentedControl: UISegmentedControl!
     @IBOutlet weak var demoSceneView: SCNView!
@@ -30,10 +29,13 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     var whiteDiff : Int = 0
     var blackDiff : Int = 0
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        beginButton.layer.cornerRadius = 8.0
         playerConfigView.layer.cornerRadius = 8.0
         
         loadingView = UIView()
@@ -84,8 +86,8 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         Chess.sharedInstance.scene = ChessScene()
         Chess.sharedInstance.demoScene = nil
         
-        //Looking into a more pleasing animation
-        self.modalPresentationStyle = .overFullScreen
+        gameView.modalTransitionStyle = .flipHorizontal
+        
         self.present(gameView, animated: true, completion: { () in
             self.gameView.sceneView.scene = Chess.sharedInstance.scene.scene
         })
