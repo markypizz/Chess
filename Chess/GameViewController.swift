@@ -14,13 +14,6 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
 
     @IBOutlet weak var sceneView: SCNView!
     
-    @IBOutlet weak var cameraLockSwitch: UISwitch!
-    var recognizer : UITapGestureRecognizer!
-    
-    var loadingView : UIView?
-    var activityIndicatorView : UIActivityIndicatorView?
-    
-    
     //Outlets for camera control
     @IBOutlet weak var yawRightButton: UIButton!
     
@@ -34,9 +27,18 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     
     @IBOutlet weak var yawLeftButton: UIButton!
     
+    @IBOutlet weak var turnIndicatorLabel: UILabel!
+    
+    @IBOutlet weak var controlsView: UIView!
+    
     var cameraYaw : SCNNode!
     var cameraPitch : SCNNode!
     var cameraZoom: SCNNode!
+    
+    var recognizer : UITapGestureRecognizer!
+    
+    var loadingView : UIView?
+    var activityIndicatorView : UIActivityIndicatorView?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -64,6 +66,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         loadingView?.addSubview(activityIndicatorView!)
         print(Chess.sharedInstance.game.gameInstance.board.printFenRepresentation())
         
+        
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -86,6 +90,13 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     }
     
     @objc func tapped(rec: UITapGestureRecognizer) {
+        
+        // Lower controls
+        
+        if !controlsView.isHidden {
+            lowerControls()
+        }
+        
         let location : CGPoint = rec.location(in: sceneView)
         let hits = self.sceneView.hitTest(location, options: nil)
         if !hits.isEmpty{
@@ -195,4 +206,32 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         
         cameraZoom?.runAction(zoom)
     }
+    
+    @IBAction func cameraControlsButtonPressed(_ sender: UIButton) {
+        
+        // Raise or lower view
+        if controlsView.isHidden {
+            raiseControls()
+        } else {
+            lowerControls()
+        }
+    }
+    
+    func raiseControls() {
+        self.controlsView.isHidden = false
+        
+        UIView.animate(withDuration: 0.2) {
+            //Accounts for safe area
+            self.controlsView.frame.origin.y = self.view.bounds.height - self.controlsView.bounds.height
+        }
+    }
+    
+    func lowerControls() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.controlsView.frame.origin.y = self.view.bounds.height
+        }) { (completed) in
+            self.controlsView.isHidden = true
+        }
+    }
+    
 }

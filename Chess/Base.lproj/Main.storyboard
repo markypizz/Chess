@@ -243,7 +243,7 @@
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="371-rT-JJZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </sceneKitView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNj-re-JWY">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNj-re-JWY" userLabel="Controls View">
                                 <rect key="frame" x="42.5" y="539" width="290" height="128"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="KS2-Mr-Gs6">
@@ -358,12 +358,50 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eCR-e2-Iff" userLabel="Status View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQO-7R-NOn">
+                                        <rect key="frame" x="335" y="28" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="6P5-sy-ZFi"/>
+                                            <constraint firstAttribute="height" constant="32" id="J9k-sO-Ke6"/>
+                                        </constraints>
+                                        <state key="normal" image="camera"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="cameraControlsButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="vaD-5f-PNK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.60392156860000001" green="0.602715373" blue="0.602715373" alpha="0.74579944349315064" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="QQO-7R-NOn" secondAttribute="bottom" constant="8" id="bGP-hb-IhS"/>
+                                    <constraint firstAttribute="trailing" secondItem="QQO-7R-NOn" secondAttribute="trailing" constant="8" id="wG4-ka-Em9"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="White's Turn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBy-iX-hNV">
+                                <rect key="frame" x="113" y="27.5" width="149.5" height="33.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="eCR-e2-Iff" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="0at-ik-RB5"/>
                             <constraint firstItem="371-rT-JJZ" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="5Um-f8-s3w"/>
+                            <constraint firstItem="KBy-iX-hNV" firstAttribute="centerX" secondItem="eCR-e2-Iff" secondAttribute="centerX" id="DsL-Yj-tCR"/>
                             <constraint firstItem="371-rT-JJZ" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="M9i-ka-ypI"/>
+                            <constraint firstItem="eCR-e2-Iff" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="XaK-gh-fTm"/>
                             <constraint firstItem="dNj-re-JWY" firstAttribute="centerX" secondItem="371-rT-JJZ" secondAttribute="centerX" id="YdW-oo-K5P"/>
+                            <constraint firstItem="eCR-e2-Iff" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="c7F-Yr-qsf"/>
+                            <constraint firstItem="KBy-iX-hNV" firstAttribute="centerY" secondItem="QQO-7R-NOn" secondAttribute="centerY" id="ef7-8e-Wqc"/>
+                            <constraint firstItem="eCR-e2-Iff" firstAttribute="bottom" secondItem="4qk-I5-YsI" secondAttribute="top" constant="48" id="jUJ-UH-ehG"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="371-rT-JJZ" secondAttribute="trailing" id="nMb-c1-HtW"/>
                             <constraint firstAttribute="bottom" secondItem="dNj-re-JWY" secondAttribute="bottom" id="rMX-1Y-o8h"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="bottom" secondItem="dNj-re-JWY" secondAttribute="top" constant="128" id="soQ-CO-jcB"/>
@@ -374,9 +412,11 @@
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="controlsView" destination="dNj-re-JWY" id="YEY-O4-wdO"/>
                         <outlet property="pitchDownButton" destination="Jk4-aU-45v" id="n5R-Nt-Cdd"/>
                         <outlet property="pitchUpButton" destination="DvK-hE-nLt" id="Rsm-cJ-KY3"/>
                         <outlet property="sceneView" destination="371-rT-JJZ" id="SvZ-dE-2DK"/>
+                        <outlet property="turnIndicatorLabel" destination="KBy-iX-hNV" id="cAf-h4-qgi"/>
                         <outlet property="yawLeftButton" destination="t1a-RY-kh9" id="HDq-6Y-9Oi"/>
                         <outlet property="yawRightButton" destination="vBq-MN-iEg" id="xzV-wA-4UL"/>
                         <outlet property="zoomInButton" destination="qIe-tG-aQg" id="ITR-2E-dme"/>
@@ -441,7 +481,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="boardCell" id="RpK-Yh-yb1" customClass="BoardCollectionViewCell" customModule="Chess" customModuleProvider="target">
-                                <rect key="frame" x="10" y="8" width="100" height="100"/>
+                                <rect key="frame" x="10" y="7.5" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -489,6 +529,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera" width="67.5" height="67.5"/>
         <image name="downArrowTri" width="180" height="180"/>
         <image name="leftArrowTri" width="180" height="180"/>
         <image name="rightArrowTri" width="180" height="180"/>
