@@ -37,7 +37,7 @@ class DemoScene {
         let rotation = SCNAction.rotate(by: 2.5, around: SCNVector3(0.0, 1.0, 0.0), duration: 15)
         
         let repeater = SCNAction.repeatForever(rotation)
-        scene?.rootNode.childNode(withName: "board", recursively: false)!.runAction(repeater)
+        scene?.rootNode.childNode(withName: "cameraYaw", recursively: false)!.runAction(repeater)
         
         let boardMaterial = SCNMaterial()
         boardMaterial.diffuse.contents = UIImage(named: "marbletexture")

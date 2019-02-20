@@ -102,10 +102,6 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         }
     }
     
-    @IBAction func cameraLockSwitched(_ sender: UISwitch) {
-        //Will be removed
-    }
-    
     // Upon successful scene render, remove the loading screen and start the game
     func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
         DispatchQueue.main.async {
