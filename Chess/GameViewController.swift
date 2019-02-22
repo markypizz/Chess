@@ -66,6 +66,12 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         loadingView?.addSubview(activityIndicatorView!)
         print(Chess.sharedInstance.game.gameInstance.board.printFenRepresentation())
         
+        //Background for camera controls
+        let bgImage = UIImage(named: "brightstripeBG")!.cgImage
+        
+        self.controlsView.backgroundColor = UIColor(patternImage:
+            UIImage(cgImage: bgImage!, scale: 4, orientation: .up))
+        
         
         
     }
