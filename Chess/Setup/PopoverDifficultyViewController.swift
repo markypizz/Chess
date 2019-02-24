@@ -38,7 +38,7 @@ class PopoverDifficultyViewController: UIViewController {
         }
         
         //A cardinal sin, dismissing a view controller from itself. However, I haven't been able to figure out how to dismiss it from SetupViewController using the delegate protocols. Something unique about UIPopoverViewControllers that I have not figured out
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
     }
     
 

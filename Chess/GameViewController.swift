@@ -10,26 +10,21 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-class GameViewController: UIViewController, SCNSceneRendererDelegate {
+class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var sceneView: SCNView!
     
     //Outlets for camera control
-    @IBOutlet weak var yawRightButton: UIButton!
-    
-    @IBOutlet weak var zoomOutButton: UIButton!
-    
-    @IBOutlet weak var pitchUpButton: UIButton!
-    
-    @IBOutlet weak var pitchDownButton: UIButton!
-    
-    @IBOutlet weak var zoomInButton: UIButton!
-    
-    @IBOutlet weak var yawLeftButton: UIButton!
+    @IBOutlet var dPadButtons: [UIButton]!
+    @IBOutlet var zoomButtons: [UIButton]!
     
     @IBOutlet weak var turnIndicatorLabel: UILabel!
+    @IBOutlet weak var freeRoamLabel: UILabel!
     
     @IBOutlet weak var controlsView: UIView!
+    @IBOutlet weak var headerView: UIView!
+    
+    @IBOutlet weak var cameraButton: UIButton!
     
     var cameraYaw : SCNNode!
     var cameraPitch : SCNNode!
@@ -39,6 +34,15 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     
     var loadingView : UIView?
     var activityIndicatorView : UIActivityIndicatorView?
+    
+    struct CameraParameters {
+        var position : SCNVector3 = SCNVector3.init()
+        var rotation : SCNVector4 = SCNVector4.init()
+        var orientation : SCNQuaternion = SCNQuaternion.init()
+        var fieldOfView : CGFloat = CGFloat(0)
+    }
+    
+    fileprivate var cameraSaveParams = CameraParameters()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -67,13 +71,15 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         print(Chess.sharedInstance.game.gameInstance.board.printFenRepresentation())
         
         //Background for camera controls
-        let bgImage = UIImage(named: "brightstripeBG")!.cgImage
+        let controlsBG = UIImage(named: "brightstripeBG")!.cgImage
         
         self.controlsView.backgroundColor = UIColor(patternImage:
-            UIImage(cgImage: bgImage!, scale: 4, orientation: .up))
+            UIImage(cgImage: controlsBG!, scale: 4, orientation: .up))
         
+        let headerBG = UIImage(named: "graytriangles")!.cgImage
         
-        
+        self.headerView.backgroundColor = UIColor(patternImage:
+            UIImage(cgImage: headerBG!, scale: 4, orientation: .up))
     }
     
     override func viewDidLayoutSubviews() {
@@ -86,6 +92,10 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     override var shouldAutorotate: Bool {
         return true
     }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
@@ -96,12 +106,11 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     }
     
     @objc func tapped(rec: UITapGestureRecognizer) {
-        
-        // Lower controls
-        
-        if !controlsView.isHidden {
-            lowerControls()
-        }
+
+//        guard !sceneView.allowsCameraControl else {
+//            exitFreeRoam()
+//            return
+//        }
         
         let location : CGPoint = rec.location(in: sceneView)
         let hits = self.sceneView.hitTest(location, options: nil)
@@ -154,12 +163,6 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     
     @IBAction func zoomOutButtonPressed(_ sender: UIButton) {
         performCameraZoom(amount: -2.0)
-        
-        if (cameraZoom.position.z >= 40.0) {
-            zoomOutButton.isEnabled = false
-        }
-        
-        zoomInButton.isEnabled = true
     }
     
     @IBAction func pitchUpButtonPressed(_ sender: UIButton) {
@@ -172,12 +175,6 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     
     @IBAction func zoomInButtonPressed(_ sender: UIButton) {
         performCameraZoom(amount: 2.0)
-        
-        if cameraZoom.position.z <= 6.0 {
-            zoomInButton.isEnabled = false
-        }
-        
-        zoomOutButton.isEnabled = true
     }
     
     @IBAction func yawLeftButtonPressed(_ sender: UIButton) {
@@ -240,4 +237,48 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         }
     }
     
+    @IBAction func unlockButtonPressed(_ sender: UIButton) {
+        sceneView.allowsCameraControl ? exitFreeRoam() : enterFreeRoam()
+    }
+    
+    fileprivate func enterFreeRoam() {
+        freeRoamLabel.isHidden = false
+        sceneView.allowsCameraControl = true
+        
+        sceneView.cameraControlConfiguration.autoSwitchToFreeCamera = false
+        
+        self.cameraSaveParams.position = cameraZoom.position
+        self.cameraSaveParams.rotation = cameraZoom.rotation
+        self.cameraSaveParams.orientation = cameraZoom.orientation
+        self.cameraSaveParams.fieldOfView = cameraZoom.camera!.fieldOfView
+        
+        for button in dPadButtons {
+            button.isEnabled = false
+        }
+        
+        for button in zoomButtons {
+            button.isEnabled = false
+        }
+    }
+    
+    fileprivate func exitFreeRoam() {
+        sceneView.defaultCameraController.stopInertia()
+        sceneView.allowsCameraControl = false
+        
+        // Recall the parameters (TODO: animate these later ?)
+        cameraZoom.position = cameraSaveParams.position
+        cameraZoom.rotation = cameraSaveParams.rotation
+        cameraZoom.orientation = cameraSaveParams.orientation
+        cameraZoom.camera!.fieldOfView = cameraSaveParams.fieldOfView
+        
+        for button in dPadButtons {
+            button.isEnabled = true
+        }
+        
+        for button in zoomButtons {
+            button.isEnabled = true
+        }
+        
+        freeRoamLabel.isHidden = true
+    }
 }

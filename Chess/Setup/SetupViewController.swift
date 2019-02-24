@@ -147,12 +147,22 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         }
     }
     
+    fileprivate func dismissDifficultyPopover() {
+        //Ensure presented VC is popover
+        if let popover = self.presentedViewController as? PopoverDifficultyViewController {
+            popover.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     func setBlackDifficulty(level: Int) {
         blackDiff = level
+        dismissDifficultyPopover()
     }
     
     func setWhiteDifficulty(level: Int) {
         whiteDiff = level
+        dismissDifficultyPopover()
+        
     }
     
     @IBAction func optionsButtonPressed(_ sender: Any) {
@@ -166,14 +176,14 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         }
     }
     
-    func openBoardSelectionWindow() {
+    fileprivate func openBoardSelectionWindow() {
         optionsContainerView.isHidden = false
         UIView.animate(withDuration: 0.2) {
             self.optionsContainerView.frame.origin.y = self.view.bounds.height - self.optionsContainerView.bounds.height
         }
     }
     
-    func closeBoardSelectionWindow() {
+    fileprivate func closeBoardSelectionWindow() {
         UIView.animate(withDuration: 0.2, animations: {
             self.optionsContainerView.frame.origin.y = self.view.bounds.height
         }) { (completed) in
