@@ -26,10 +26,8 @@ in the main project directory. This should download the necessary dependencies. 
 
 License
 ----
-Chess piece models are royalty free, created by Polylel from cgtrader.com  
-All images and graphics are public domain.  
-I claim ownership of my own code. All rights reserved.  
-No permission granted to sell this work or sell any modifications without permission.
+My own code & app: All rights reserved.
+See [LICENSE](https://github.com/markypizz/Chess/blob/master/LICENSE) for more information.
 
 Other
 ----
