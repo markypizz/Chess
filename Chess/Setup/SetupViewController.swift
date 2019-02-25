@@ -15,7 +15,12 @@ enum LoadError : Error {
     case runtimeError(String)
 }
 
-class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverPresentationControllerDelegate, BlackDifficultyDelegate, WhiteDifficultyDelegate {
+class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverPresentationControllerDelegate, BlackDifficultyDelegate, WhiteDifficultyDelegate, GameplayDelegate {
+    
+    func returnToMenu() {
+        // Return to menu
+        gameView.dismiss(animated: true, completion: nil)
+    }
     
     var gameView : GameViewController!
     
@@ -38,13 +43,22 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         
         playerConfigView.layer.cornerRadius = 8.0
         
-        loadingView = UIView()
-        loadingView?.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        
         #if !targetEnvironment(simulator)
             demoSceneView.antialiasingMode = .multisampling4X
         #endif
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        //Remove a previous loading view
+        if loadingView != nil {
+            loadingView?.removeFromSuperview()
+            loadingView = nil
+        }
+        
+        loadingView = UIView()
+        loadingView?.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         self.demoSceneView.addSubview(loadingView!)
     }
     
@@ -74,6 +88,8 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     
     @IBAction func beginButtonPressed(_ sender: Any) {
         gameView = storyboard?.instantiateViewController(withIdentifier: "chessView") as? GameViewController
+        
+        gameView.gameplayDelegate = self
         
         Chess.sharedInstance = Chess()
         

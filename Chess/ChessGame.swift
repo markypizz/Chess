@@ -23,6 +23,9 @@ class ChessGame : GameDelegate {
 
     var removeLocation : BoardLocation?
     
+    // A little weird, is there a better way to do this?
+    var gameViewController : GameViewController!
+    
     init(white: PlayerType, whiteDifficulty : AIConfiguration.Difficulty, black: PlayerType, blackDifficulty : AIConfiguration.Difficulty) {
         if (white == .ai) {
             whitePlayer = AIPlayer(color: .white, configuration: AIConfiguration(difficulty: whiteDifficulty))
@@ -57,7 +60,7 @@ class ChessGame : GameDelegate {
     }
     
     func gameDidChangeCurrentPlayer(game: Game) {
-        
+        gameViewController.gameChangedPlayerTo(color: game.currentPlayer.color.string)
         //AI will make move on its turn
         if let player = game.currentPlayer as? AIPlayer {
             player.makeMoveAsync()
@@ -78,10 +81,19 @@ class ChessGame : GameDelegate {
     func gameWonByPlayer(game: Game, player: Player) {
         trySceneUpdates()
         print("gameWonByPlayer \(player)")
+        
+        if player is Human {
+            // End Game
+            Chess.sharedInstance.scene.gameWonByPlayer()
+        } else {
+            Chess.sharedInstance.scene.gameWonByAI()
+        }
     }
     
     func gameEndedInStaleMate(game: Game) {
         trySceneUpdates()
+        
+        Chess.sharedInstance.scene.gameEndedInStaleMate()
     }
     
     func gameWillBeginUpdates(game: Game) {

@@ -46,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VlN-jw-ix9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11" y="205"/>
+            <point key="canvasLocation" x="9" y="209"/>
         </scene>
         <!--Setup View Controller-->
         <scene sceneID="UMn-Ew-0Pa">
@@ -56,7 +56,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="DemoScene.scn" translatesAutoresizingMaskIntoConstraints="NO" id="6KF-GC-wby">
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6KF-GC-wby">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </sceneKitView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhB-td-GD2">
@@ -262,11 +262,23 @@
                                             <action selector="cameraControlsButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="vaD-5f-PNK"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5X-GO-NND">
+                                        <rect key="frame" x="8" y="52" width="32" height="32"/>
+                                        <state key="normal" image="gear"/>
+                                        <connections>
+                                            <action selector="optionsButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="b8R-h6-2u2"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.60392156860000001" green="0.602715373" blue="0.602715373" alpha="0.74579944349315064" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="q5X-GO-NND" secondAttribute="bottom" constant="8" id="3tC-xO-7OM"/>
+                                    <constraint firstItem="QQO-7R-NOn" firstAttribute="centerY" secondItem="q5X-GO-NND" secondAttribute="centerY" id="aOI-ZH-AA6"/>
+                                    <constraint firstItem="QQO-7R-NOn" firstAttribute="height" secondItem="q5X-GO-NND" secondAttribute="height" id="adC-PG-ktq"/>
                                     <constraint firstAttribute="bottom" secondItem="QQO-7R-NOn" secondAttribute="bottom" constant="8" id="bGP-hb-IhS"/>
                                     <constraint firstAttribute="trailing" secondItem="QQO-7R-NOn" secondAttribute="trailing" constant="8" id="wG4-ka-Em9"/>
+                                    <constraint firstItem="QQO-7R-NOn" firstAttribute="width" secondItem="q5X-GO-NND" secondAttribute="width" id="xwU-TK-t1q"/>
+                                    <constraint firstItem="q5X-GO-NND" firstAttribute="leading" secondItem="eCR-e2-Iff" secondAttribute="leading" constant="8" id="yln-Se-2hJ"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="White's Turn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBy-iX-hNV">
@@ -383,7 +395,7 @@
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRK-Rv-MU6">
                                                                 <rect key="frame" x="204" y="0.0" width="45" height="45"/>
-                                                                <state key="normal" image="unlock"/>
+                                                                <state key="normal" image="lock"/>
                                                                 <connections>
                                                                     <action selector="unlockButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="IHs-9a-2BC"/>
                                                                 </connections>
@@ -483,26 +495,31 @@
                         <outlet property="controlsView" destination="dNj-re-JWY" id="YEY-O4-wdO"/>
                         <outlet property="freeRoamLabel" destination="zKX-4G-1rt" id="CLt-bd-Jq5"/>
                         <outlet property="headerView" destination="eCR-e2-Iff" id="jiw-BX-sMK"/>
+                        <outlet property="ingameOptionsButton" destination="q5X-GO-NND" id="35o-nK-aLZ"/>
                         <outlet property="sceneView" destination="371-rT-JJZ" id="SvZ-dE-2DK"/>
                         <outlet property="turnIndicatorLabel" destination="KBy-iX-hNV" id="cAf-h4-qgi"/>
+                        <outlet property="unlockButton" destination="SRK-Rv-MU6" id="Udj-RT-FLg"/>
                         <outletCollection property="dPadButtons" destination="t1a-RY-kh9" collectionClass="NSMutableArray" id="GHf-47-qe8"/>
                         <outletCollection property="dPadButtons" destination="DvK-hE-nLt" collectionClass="NSMutableArray" id="pCP-rS-ti6"/>
                         <outletCollection property="dPadButtons" destination="Jk4-aU-45v" collectionClass="NSMutableArray" id="jYF-hS-GbZ"/>
                         <outletCollection property="dPadButtons" destination="vBq-MN-iEg" collectionClass="NSMutableArray" id="wdu-mX-A75"/>
                         <outletCollection property="zoomButtons" destination="qIe-tG-aQg" collectionClass="NSMutableArray" id="z0V-P6-Qsb"/>
                         <outletCollection property="zoomButtons" destination="F2Y-M6-pgo" collectionClass="NSMutableArray" id="Ktm-5g-CdN"/>
+                        <segue destination="0WG-tV-Ehr" kind="popoverPresentation" identifier="ingameOptionsSegue" popoverAnchorView="q5X-GO-NND" id="vtM-Jf-CXG">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="576.79999999999995" y="120.98950524737631"/>
+            <point key="canvasLocation" x="616" y="121"/>
         </scene>
-        <!--Table View Controller-->
+        <!--In Game Options Table View Controller-->
         <scene sceneID="3SA-qy-awq">
             <objects>
-                <tableViewController storyboardIdentifier="popovertableview" id="0WG-tV-Ehr" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="popovertableview" id="0WG-tV-Ehr" customClass="InGameOptionsTableViewController" customModule="Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" id="mOj-wS-P0m">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="132"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
@@ -515,7 +532,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Toggle Controls" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1j9-Hu-t9z">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Exit Game" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1j9-Hu-t9z">
                                                     <rect key="frame" x="16" y="0.0" width="168" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -524,40 +541,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="tIl-U0-9LY" style="IBUITableViewCellStyleDefault" id="A1d-Yc-5Ii">
-                                        <rect key="frame" x="0.0" y="44" width="200" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A1d-Yc-5Ii" id="pJx-7u-ggV">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Toggle Free Roam" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tIl-U0-9LY">
-                                                    <rect key="frame" x="16" y="0.0" width="168" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="GBE-wc-c3o" style="IBUITableViewCellStyleDefault" id="v9c-go-5wc">
-                                        <rect key="frame" x="0.0" y="88" width="200" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v9c-go-5wc" id="VAX-Ta-ClE">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Reset Camera" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GBE-wc-c3o">
-                                                    <rect key="frame" x="16" y="0.0" width="168" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -567,12 +551,12 @@
                             <outlet property="delegate" destination="0WG-tV-Ehr" id="Wkl-93-QrG"/>
                         </connections>
                     </tableView>
-                    <value key="contentSizeForViewInPopover" type="size" width="200" height="132"/>
-                    <size key="freeformSize" width="200" height="132"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="44"/>
+                    <size key="freeformSize" width="200" height="120"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w3L-zJ-MZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1136" y="-136"/>
+            <point key="canvasLocation" x="10" y="-165"/>
         </scene>
         <!--White Difficulty Popover View Controller-->
         <scene sceneID="uSD-VO-ZhH">
@@ -679,9 +663,10 @@
         <image name="arrowdown" width="180" height="180"/>
         <image name="arrowup" width="180" height="180"/>
         <image name="camera" width="67.5" height="67.5"/>
+        <image name="gear" width="67.5" height="67.5"/>
         <image name="leftArrowTri" width="180" height="180"/>
+        <image name="lock" width="180" height="180"/>
         <image name="rightArrowTri" width="180" height="180"/>
-        <image name="unlock" width="180" height="180"/>
         <image name="zoomin" width="180" height="180"/>
         <image name="zoomout" width="180" height="180"/>
     </resources>

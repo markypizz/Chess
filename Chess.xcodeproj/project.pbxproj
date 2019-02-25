@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2301305B2202D72300967ABC /* BoardSelectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301305A2202D72300967ABC /* BoardSelectCollectionViewController.swift */; };
 		2301305D2202D7FC00967ABC /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301305C2202D7FC00967ABC /* BoardCollectionViewCell.swift */; };
+		230DB99F22236B9600C4A0AC /* InGameOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230DB99E22236B9600C4A0AC /* InGameOptionsTableViewController.swift */; };
 		231201BF21DDB18C002754D9 /* ChessGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231201BE21DDB18C002754D9 /* ChessGame.swift */; };
 		234580BD21D1EE0100CF6956 /* ChessScene.scn in Resources */ = {isa = PBXBuildFile; fileRef = 234580BC21D1EE0100CF6956 /* ChessScene.scn */; };
 		234580C421D1F13F00CF6956 /* ChessScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234580C321D1F13F00CF6956 /* ChessScene.swift */; };
@@ -41,6 +42,7 @@
 		1452C2AD7DDDEEAB95F093DD /* Pods-ChessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChessTests/Pods-ChessTests.release.xcconfig"; sourceTree = "<group>"; };
 		2301305A2202D72300967ABC /* BoardSelectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSelectCollectionViewController.swift; sourceTree = "<group>"; };
 		2301305C2202D7FC00967ABC /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
+		230DB99E22236B9600C4A0AC /* InGameOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InGameOptionsTableViewController.swift; sourceTree = "<group>"; };
 		231201BE21DDB18C002754D9 /* ChessGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessGame.swift; sourceTree = "<group>"; };
 		234580BC21D1EE0100CF6956 /* ChessScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ChessScene.scn; sourceTree = "<group>"; };
 		234580C321D1F13F00CF6956 /* ChessScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -95,6 +97,17 @@
 			path = "Board Selection";
 			sourceTree = "<group>";
 		};
+		230DB9A022236BB600C4A0AC /* In-Game */ = {
+			isa = PBXGroup;
+			children = (
+				234580BC21D1EE0100CF6956 /* ChessScene.scn */,
+				234580C321D1F13F00CF6956 /* ChessScene.swift */,
+				2361C10A21D1870B004362A5 /* GameViewController.swift */,
+				230DB99E22236B9600C4A0AC /* InGameOptionsTableViewController.swift */,
+			);
+			path = "In-Game";
+			sourceTree = "<group>";
+		};
 		2348349A21FD1D6500BB9DF6 /* Setup */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,12 +144,10 @@
 			isa = PBXGroup;
 			children = (
 				2361C10221D1870B004362A5 /* AppDelegate.swift */,
-				234580BC21D1EE0100CF6956 /* ChessScene.scn */,
-				234580C321D1F13F00CF6956 /* ChessScene.swift */,
-				2361C10A21D1870B004362A5 /* GameViewController.swift */,
 				23A9017821D9E0D400A05808 /* Chess.swift */,
 				231201BE21DDB18C002754D9 /* ChessGame.swift */,
 				2361C10C21D1870B004362A5 /* Main.storyboard */,
+				230DB9A022236BB600C4A0AC /* In-Game */,
 				2348349A21FD1D6500BB9DF6 /* Setup */,
 				2361C10F21D1870D004362A5 /* Assets.xcassets */,
 				2361C11121D1870D004362A5 /* LaunchScreen.storyboard */,
@@ -356,6 +367,7 @@
 				2361C10B21D1870B004362A5 /* GameViewController.swift in Sources */,
 				2361C10321D1870B004362A5 /* AppDelegate.swift in Sources */,
 				2348349921FD1D4C00BB9DF6 /* PopoverDifficultyViewController.swift in Sources */,
+				230DB99F22236B9600C4A0AC /* InGameOptionsTableViewController.swift in Sources */,
 				2301305D2202D7FC00967ABC /* BoardCollectionViewCell.swift in Sources */,
 				234580C421D1F13F00CF6956 /* ChessScene.swift in Sources */,
 				2366F77121D5F58800218D09 /* SetupViewController.swift in Sources */,
