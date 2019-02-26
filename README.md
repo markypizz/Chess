@@ -1,4 +1,5 @@
 # 3D Chess for iPhone
+[![Build Status](https://travis-ci.com/markypizz/Chess.svg?branch=master)](https://travis-ci.com/markypizz/Chess)
 
 [![N|Solid](https://cdn4.iconfinder.com/data/icons/logos-3/1300/swift-seeklogo-128.png)](https://nodesource.com/products/nsolid)
 
