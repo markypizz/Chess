@@ -1,0 +1,8 @@
+language: swift
+os: osx
+osx_image: xcode10.1
+xcode_workspace: Chess.xcworkspace
+xcode_scheme: Chess
+xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone XR
+before_install:
+- pod install
