@@ -7,15 +7,15 @@
 
 Background
 ----
-At its core, this application uses a SceneKit front-end on top of a Chess logic backend known as [SwiftChess](https://github.com/SteveBarnegren/SwiftChess), which has been slightly modified to fit the needs of the application. A central Chess class is the hub of communication across modules, as it contains some static constants, image name references, references to the two scenes (the intro background scene, and the in-game scene), and the user preferences for board and material type.
+At its core, this application uses a SceneKit front-end on top of a Chess logic backend known as [SwiftChess](https://github.com/SteveBarnegren/SwiftChess), which has been slightly modified to fit the needs of the application. The front-end is responsible for for translating user touches into logic for the back-end, and moving the pieces on screen  according to the back-end's response. 
 
-Much of this project's time has been spent tackling problems I haven't faced before, especially communicating with nodes in SceneKit. More recently, a huge subject of my time has been spent trying to find a way to integrate Stockfish to provide a stronger, more reliable AI. Stockfish, written in C++ won't play nicely with Swift, and is generally only compatible (though still barely) with Objective-C. I have since turned my sights to a [javascript port of Stockfish](https://github.com/exoticorn/stockfish-js), and I have been investigating ways to bridge javascript and Swift. Attempts to instantiate a JSContext worker object with this javascript binary have been unsuccessful so far, (though I haven't given up yet). If I can manage to work this out, I may have a heck of an app on my hands.
+I could go on and on about the incredibly rewarding challenges I've faced developing this app from a development/learning perspective. Areas such as API interfacing, basic multithreading & race-conditions, creating a "live" and polished user experience, SceneKit nodes/cameras/animations, working heavily with delegates and nested view controllers, and so much more.
 
-Most of my workflow and progress can be seen from the [Projects](https://github.com/markypizz/Chess/projects) tab. Many of these tasks are likely not due to be completed any time soon, and many are just some bonus features if I happen to find a ton of time to waste on tackling them, including online play.
+Most of my specific tasks and overall workflow/progress can be seen from the [Projects](https://github.com/markypizz/Chess/projects) tab. Many of these tasks are likely not due to be completed any time soon, and many are just some bonus features if I happen to find a ton of time to waste on tackling them. Though I'm the only one really using this repository, I find the agile-esque kanban board for me to be a very effective way of keeping track of my progress.
 
-Here's a WIP photo of the main menu. The board in the background rotates slowly:
+Here's an WIP in-game shot:
 
-<img src="https://i.imgur.com/vvCIIS7.png" width="200">
+<img src="https://i.imgur.com/nREbBsg.png" width="200">
 
 Building the Project
 ----
@@ -32,4 +32,7 @@ See [LICENSE](https://github.com/markypizz/Chess/blob/master/LICENSE) for more i
 
 Other
 ----
+
+I am always looking for suggestions on how I can make the app better, especially from a visual standpoint. Any thoughts/suggestions on my coding practices are very welcome. I am always looking for ways to improve.
+
 I do hope you will take the time to check out some of my other work! I am especially proud of my project [MusicansToolkit](https://github.com/markypizz/MusiciansToolkit) a set of tools for musicians including a tuner, metronome, audio recorder, on-screen playable guitar, and more!
