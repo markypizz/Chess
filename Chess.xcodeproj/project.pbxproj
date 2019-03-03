@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2301305B2202D72300967ABC /* BoardSelectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301305A2202D72300967ABC /* BoardSelectCollectionViewController.swift */; };
-		2301305D2202D7FC00967ABC /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301305C2202D7FC00967ABC /* BoardCollectionViewCell.swift */; };
+		2301305D2202D7FC00967ABC /* BoardOptionsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2301305C2202D7FC00967ABC /* BoardOptionsCollectionViewCell.swift */; };
 		230DB99F22236B9600C4A0AC /* InGameOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230DB99E22236B9600C4A0AC /* InGameOptionsTableViewController.swift */; };
 		231201BF21DDB18C002754D9 /* ChessGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231201BE21DDB18C002754D9 /* ChessGame.swift */; };
+		2341B7FC222A776F00C383F2 /* OptionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2341B7FB222A776F00C383F2 /* OptionsPageViewController.swift */; };
 		234580BD21D1EE0100CF6956 /* ChessScene.scn in Resources */ = {isa = PBXBuildFile; fileRef = 234580BC21D1EE0100CF6956 /* ChessScene.scn */; };
 		234580C421D1F13F00CF6956 /* ChessScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234580C321D1F13F00CF6956 /* ChessScene.swift */; };
 		2348349721FD165D00BB9DF6 /* DemoScene.scn in Resources */ = {isa = PBXBuildFile; fileRef = 2348349621FD165D00BB9DF6 /* DemoScene.scn */; };
@@ -24,6 +25,8 @@
 		2361C11E21D1870D004362A5 /* ChessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2361C11D21D1870D004362A5 /* ChessTests.swift */; };
 		2366F77121D5F58800218D09 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2366F77021D5F58800218D09 /* SetupViewController.swift */; };
 		23A9017921D9E0D400A05808 /* Chess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A9017821D9E0D400A05808 /* Chess.swift */; };
+		23E1BAE9222B16530068AFF3 /* SideSelectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E1BAE8222B16530068AFF3 /* SideSelectCollectionViewController.swift */; };
+		23E1BAEB222B223C0068AFF3 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E1BAEA222B223C0068AFF3 /* OptionsViewController.swift */; };
 		28DF01F57FBD37C689ADEACA /* Pods_ChessTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F8BB10473BF728AAF2FBA52 /* Pods_ChessTests.framework */; };
 		D3F17FE91D2F50F5AD982DAE /* Pods_Chess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D627E830E359A77CDC0950C /* Pods_Chess.framework */; };
 /* End PBXBuildFile section */
@@ -41,9 +44,10 @@
 /* Begin PBXFileReference section */
 		1452C2AD7DDDEEAB95F093DD /* Pods-ChessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChessTests/Pods-ChessTests.release.xcconfig"; sourceTree = "<group>"; };
 		2301305A2202D72300967ABC /* BoardSelectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSelectCollectionViewController.swift; sourceTree = "<group>"; };
-		2301305C2202D7FC00967ABC /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
+		2301305C2202D7FC00967ABC /* BoardOptionsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardOptionsCollectionViewCell.swift; sourceTree = "<group>"; };
 		230DB99E22236B9600C4A0AC /* InGameOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InGameOptionsTableViewController.swift; sourceTree = "<group>"; };
 		231201BE21DDB18C002754D9 /* ChessGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessGame.swift; sourceTree = "<group>"; };
+		2341B7FB222A776F00C383F2 /* OptionsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsPageViewController.swift; sourceTree = "<group>"; };
 		234580BC21D1EE0100CF6956 /* ChessScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ChessScene.scn; sourceTree = "<group>"; };
 		234580C321D1F13F00CF6956 /* ChessScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		2348349621FD165D00BB9DF6 /* DemoScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = DemoScene.scn; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 		2361C11F21D1870D004362A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2366F77021D5F58800218D09 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		23A9017821D9E0D400A05808 /* Chess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chess.swift; sourceTree = "<group>"; };
+		23E1BAE8222B16530068AFF3 /* SideSelectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideSelectCollectionViewController.swift; sourceTree = "<group>"; };
+		23E1BAEA222B223C0068AFF3 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		55F87506BC3438FA09897DB9 /* Pods-Chess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chess.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chess/Pods-Chess.debug.xcconfig"; sourceTree = "<group>"; };
 		5D627E830E359A77CDC0950C /* Pods_Chess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F8BB10473BF728AAF2FBA52 /* Pods_ChessTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChessTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,8 +97,11 @@
 		2301305E2202D80200967ABC /* Board Selection */ = {
 			isa = PBXGroup;
 			children = (
-				2301305C2202D7FC00967ABC /* BoardCollectionViewCell.swift */,
+				2301305C2202D7FC00967ABC /* BoardOptionsCollectionViewCell.swift */,
 				2301305A2202D72300967ABC /* BoardSelectCollectionViewController.swift */,
+				23E1BAE8222B16530068AFF3 /* SideSelectCollectionViewController.swift */,
+				2341B7FB222A776F00C383F2 /* OptionsPageViewController.swift */,
+				23E1BAEA222B223C0068AFF3 /* OptionsViewController.swift */,
 			);
 			path = "Board Selection";
 			sourceTree = "<group>";
@@ -112,8 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				2301305E2202D80200967ABC /* Board Selection */,
-				2348349821FD1D4C00BB9DF6 /* PopoverDifficultyViewController.swift */,
 				2348349621FD165D00BB9DF6 /* DemoScene.scn */,
+				2348349821FD1D4C00BB9DF6 /* PopoverDifficultyViewController.swift */,
 				2348349B21FD1D7000BB9DF6 /* DemoScene.swift */,
 				2366F77021D5F58800218D09 /* SetupViewController.swift */,
 			);
@@ -363,14 +372,17 @@
 				231201BF21DDB18C002754D9 /* ChessGame.swift in Sources */,
 				2348349C21FD1D7000BB9DF6 /* DemoScene.swift in Sources */,
 				23A9017921D9E0D400A05808 /* Chess.swift in Sources */,
+				23E1BAEB222B223C0068AFF3 /* OptionsViewController.swift in Sources */,
 				2301305B2202D72300967ABC /* BoardSelectCollectionViewController.swift in Sources */,
 				2361C10B21D1870B004362A5 /* GameViewController.swift in Sources */,
 				2361C10321D1870B004362A5 /* AppDelegate.swift in Sources */,
 				2348349921FD1D4C00BB9DF6 /* PopoverDifficultyViewController.swift in Sources */,
 				230DB99F22236B9600C4A0AC /* InGameOptionsTableViewController.swift in Sources */,
-				2301305D2202D7FC00967ABC /* BoardCollectionViewCell.swift in Sources */,
+				2301305D2202D7FC00967ABC /* BoardOptionsCollectionViewCell.swift in Sources */,
 				234580C421D1F13F00CF6956 /* ChessScene.swift in Sources */,
 				2366F77121D5F58800218D09 /* SetupViewController.swift in Sources */,
+				2341B7FC222A776F00C383F2 /* OptionsPageViewController.swift in Sources */,
+				23E1BAE9222B16530068AFF3 /* SideSelectCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,12 +26,19 @@ class Chess {
     
     // Static global constants
     static let boardChoices = ["regularchessboard","woodchessboard","graychessboard","greenchessboard","jebhead"]
-    static let boardBodies = [String]()
-    static let boardCustomizations = ["Surface","Material"]
+    static let sideChoices = ["marbletexture","woodplanks","woodtile"]
+    static let optionsPages = ["boardSelectVC", "sideSelectVC"]
+    static let optionsPagesNames = ["Pattern Select","Board Select"]
     
     var boardSelection = UserDefaults.standard.integer(forKey: "boardIndex") {
         didSet {
             UserDefaults.standard.set(boardSelection, forKey: "boardIndex")
+        }
+    }
+    
+    var sideSelection = UserDefaults.standard.integer(forKey: "sideIndex") {
+        didSet {
+            UserDefaults.standard.set(sideSelection, forKey: "sideIndex")
         }
     }
     

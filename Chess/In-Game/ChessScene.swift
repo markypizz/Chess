@@ -88,29 +88,32 @@ class ChessScene {
         let planeMaterial = SCNMaterial()
         
         //Set chessboard image on plane
-        let imageName = Chess.boardChoices[Chess.sharedInstance.boardSelection]
+        var imageName = Chess.boardChoices[Chess.sharedInstance.boardSelection]
         planeMaterial.diffuse.contents = UIImage(named: imageName)
         
         let plane = scene?.rootNode.childNode(withName: "plane", recursively: false)
             
         plane!.geometry?.materials = [planeMaterial]
         
-        let boardMaterial = SCNMaterial()
-        boardMaterial.diffuse.contents = UIImage(named: "woodtile")
+        //Set board/side material
+        let sideMaterial = SCNMaterial()
+        imageName = Chess.sideChoices[Chess.sharedInstance.sideSelection]
+        sideMaterial.diffuse.contents = UIImage(named: imageName)
         let board = scene?.rootNode.childNode(withName: "board", recursively: false)
+        board!.geometry?.materials = [sideMaterial]
         
-        board!.geometry?.materials = [boardMaterial]
-        
+        //Get all piece locations
         var allPieceLocations = Chess.sharedInstance.game.gameInstance.board.getLocations(of: Color.white)
         allPieceLocations += Chess.sharedInstance.game.gameInstance.board.getLocations(of: Color.black)
         
-        // Particles
+        //Set up particle confetti system
         particleSystem = scene?.rootNode.childNode(withName: "particles", recursively: false)?.particleSystems?[0]
         
         particleSystem.colliderNodes = [plane!,board!]
         
         initializePieces(locations: allPieceLocations)
         
+        //No BG if on simulator
         #if !targetEnvironment(simulator)
             let bgImage = UIImage(named: "woodenlounge")
             scene?.background.contents = bgImage
@@ -120,12 +123,10 @@ class ChessScene {
     
     func tapped(node: SCNNode) {
         let position = node.worldPosition
-        
         tapped(location: position)
     }
     
     func tapped(location : SCNVector3) {
-        
         if (Chess.sharedInstance.game.gameInstance.currentPlayer is Human) {
             if (firstTappedLocation == nil) {
                 if (Chess.sharedInstance.game.gameInstance.currentPlayer!.occupiesSquare(at: boardLocationFor(nodePosition: location))) {

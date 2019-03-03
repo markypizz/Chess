@@ -40,7 +40,8 @@ class DemoScene {
         scene?.rootNode.childNode(withName: "cameraYaw", recursively: false)!.runAction(repeater)
         
         let boardMaterial = SCNMaterial()
-        boardMaterial.diffuse.contents = UIImage(named: "marbletexture")
+        boardMaterial.diffuse.contents = UIImage(named: Chess.sideChoices[
+            Chess.sharedInstance.sideSelection])
         
         let board =
         scene?.rootNode.childNode(withName: "board", recursively: false)!
@@ -53,5 +54,12 @@ class DemoScene {
         
         scene?.rootNode.childNode(withName: "plane", recursively: true)?.geometry?.firstMaterial?.diffuse.contents = Chess.boardChoices[
             Chess.sharedInstance.boardSelection]
+    }
+    
+    func changeSideTo(index : Int) {
+        Chess.sharedInstance.sideSelection = index
+        
+        scene?.rootNode.childNode(withName: "board", recursively: true)?.geometry?.firstMaterial?.diffuse.contents = Chess.sideChoices[
+            Chess.sharedInstance.sideSelection]
     }
 }

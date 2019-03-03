@@ -28,11 +28,13 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     @IBOutlet weak var whiteSegmentedControl: UISegmentedControl!
     @IBOutlet weak var blackSegmentedControl: UISegmentedControl!
     @IBOutlet weak var demoSceneView: SCNView!
-    @IBOutlet weak var optionsContainerView: UIView!
+    @IBOutlet weak var optionsView: UIView!
     
     var loadingView : UIView?
     var whiteDiff : Int = 0
     var blackDiff : Int = 0
+    
+    var tapRecognizer : UITapGestureRecognizer!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -42,6 +44,8 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         super.viewDidLoad()
         
         playerConfigView.layer.cornerRadius = 8.0
+        tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchedScreen(sender:)))
+        demoSceneView.addGestureRecognizer(tapRecognizer)
         
         #if !targetEnvironment(simulator)
             demoSceneView.antialiasingMode = .multisampling4X
@@ -77,22 +81,20 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
             loadingView?.frame = demoSceneView.frame
         }
         
-        if optionsContainerView.isHidden {
+        if optionsView.isHidden {
            
             //Keep offscreen
-            optionsContainerView.frame.origin.y = self.view.bounds.height
+            optionsView.frame.origin.y = self.view.bounds.height
         } else {
-            optionsContainerView.frame.origin.y = self.view.bounds.height - optionsContainerView.bounds.height
+            optionsView.frame.origin.y = self.view.bounds.height - optionsView.bounds.height
         }
     }
     
     @IBAction func beginButtonPressed(_ sender: Any) {
         gameView = storyboard?.instantiateViewController(withIdentifier: "chessView") as? GameViewController
-        
         gameView.gameplayDelegate = self
         
         Chess.sharedInstance = Chess()
-        
         Chess.sharedInstance.game = ChessGame(
             white: PlayerType(rawValue: whiteSegmentedControl!.selectedSegmentIndex)!,
             whiteDifficulty: AIConfiguration.Difficulty(rawValue: whiteDiff)!,
@@ -186,24 +188,24 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     }
     
     //Not super efficient, acting on every touch.
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !optionsContainerView.isHidden {
+    @objc func touchedScreen(sender: UITapGestureRecognizer) {
+        if !optionsView.isHidden {
             closeBoardSelectionWindow()
         }
     }
     
     fileprivate func openBoardSelectionWindow() {
-        optionsContainerView.isHidden = false
-        UIView.animate(withDuration: 0.2) {
-            self.optionsContainerView.frame.origin.y = self.view.bounds.height - self.optionsContainerView.bounds.height
+        optionsView.isHidden = false
+        UIView.animate(withDuration: 0.25) {
+            self.optionsView.frame.origin.y = self.view.bounds.height - self.optionsView.bounds.height
         }
     }
     
     fileprivate func closeBoardSelectionWindow() {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.optionsContainerView.frame.origin.y = self.view.bounds.height
+        UIView.animate(withDuration: 0.25, animations: {
+            self.optionsView.frame.origin.y = self.view.bounds.height
         }) { (completed) in
-            self.optionsContainerView.isHidden = true
+            self.optionsView.isHidden = true
         }
     }
 }

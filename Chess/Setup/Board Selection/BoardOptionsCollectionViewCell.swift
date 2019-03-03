@@ -8,12 +8,12 @@
 
 import UIKit
 
-class BoardCollectionViewCell: UICollectionViewCell {
+class BoardOptionsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var selectedView: UIView!
     
     var imageName : String?
-    var boardIndex : Int?
+    var index : Int?
 }

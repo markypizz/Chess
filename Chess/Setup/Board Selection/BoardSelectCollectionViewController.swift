@@ -8,9 +8,9 @@
 
 import UIKit
 
-private let reuseIdentifier = "boardCell"
-
 class BoardSelectCollectionViewController: UICollectionViewController {
+    
+    private let reuseIdentifier = "boardCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,14 +51,14 @@ class BoardSelectCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BoardCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BoardOptionsCollectionViewCell
         
-        cell.boardIndex = indexPath.row
-        cell.imageName = Chess.boardChoices[cell.boardIndex!]
+        cell.index = indexPath.row
+        cell.imageName = Chess.boardChoices[cell.index!]
         cell.imageView.image = UIImage(named: cell.imageName!)
         
         //Need to fix selected bug
-        if (cell.boardIndex == Chess.sharedInstance.boardSelection) {
+        if (cell.index == Chess.sharedInstance.boardSelection) {
             cell.selectedView.backgroundColor = UIColor.green
         } else {
             cell.selectedView.backgroundColor = UIColor.black
