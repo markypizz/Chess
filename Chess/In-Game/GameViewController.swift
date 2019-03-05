@@ -12,19 +12,14 @@ import GameplayKit
 import SwiftChess
 
 protocol GameplayDelegate {
-    func returnToMenu()
+    func returnToMenu(presentedGameView: UIViewController)
 }
 
-class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverPresentationControllerDelegate {
+class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverPresentationControllerDelegate, CameraControlDelegate {
     
     var gameplayDelegate : GameplayDelegate!
     
     @IBOutlet weak var sceneView: SCNView!
-    
-    //Outlets for camera control
-    @IBOutlet var dPadButtons: [UIButton]!
-    @IBOutlet var zoomButtons: [UIButton]!
-    @IBOutlet weak var unlockButton: UIButton!
     
     @IBOutlet weak var turnIndicatorLabel: UILabel!
     @IBOutlet weak var freeRoamLabel: UILabel!
@@ -35,23 +30,10 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverP
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var ingameOptionsButton: UIButton!
     
-    var cameraYaw : SCNNode!
-    var cameraPitch : SCNNode!
-    var cameraZoom: SCNNode!
-    
     var recognizer : UITapGestureRecognizer!
     
     var loadingView : UIView?
     var activityIndicatorView : UIActivityIndicatorView?
-    
-    struct CameraParameters {
-        var position : SCNVector3 = SCNVector3.init()
-        var rotation : SCNVector4 = SCNVector4.init()
-        var orientation : SCNQuaternion = SCNQuaternion.init()
-        var fieldOfView : CGFloat = CGFloat(0)
-    }
-    
-    fileprivate var cameraSaveParams = CameraParameters()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -71,7 +53,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverP
         sceneView.addGestureRecognizer(recognizer)
         
         loadingView = UIView()
-        loadingView?.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        loadingView?.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         self.view.addSubview(loadingView!)
         self.view.bringSubviewToFront(loadingView!)
         
@@ -79,12 +61,6 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverP
         activityIndicatorView?.startAnimating()
         loadingView?.addSubview(activityIndicatorView!)
         print(Chess.sharedInstance.game.gameInstance.board.printFenRepresentation())
-        
-        //Background for camera controls
-        let controlsBG = UIImage(named: "brightstripeBG")!.cgImage
-        
-        self.controlsView.backgroundColor = UIColor(patternImage:
-            UIImage(cgImage: controlsBG!, scale: 4, orientation: .up))
         
         let headerBG = UIImage(named: "graytriangles")!.cgImage
         
@@ -116,12 +92,6 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverP
     }
     
     @objc func tapped(rec: UITapGestureRecognizer) {
-
-//        guard !sceneView.allowsCameraControl else {
-//            exitFreeRoam()
-//            return
-//        }
-        
         let location : CGPoint = rec.location(in: sceneView)
         let hits = self.sceneView.hitTest(location, options: nil)
         if !hits.isEmpty{
@@ -143,7 +113,6 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverP
         DispatchQueue.main.async {
             if self.loadingView != nil {
                 self.activityIndicatorView?.stopAnimating()
-                self.initializeCameraReferences()
                 UIView.animate(withDuration: 1, animations: {
                     self.loadingView?.alpha = 0
                 }) { (completed) in
@@ -158,70 +127,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverP
         }
     }
     
-    func initializeCameraReferences() {
-        
-        self.cameraYaw = sceneView.scene!.rootNode.childNode(withName: "cameraYaw", recursively: false)
-        
-        self.cameraPitch = self.cameraYaw.childNode(withName: "cameraPitch", recursively: false)
-        
-        self.cameraZoom = self.cameraPitch.childNode(withName: "cameraZoom", recursively: false)
-    }
-    
-    @IBAction func yawRightButtonPressed(_ sender: UIButton) {
-        performCameraYaw(degrees: 45.0/2)
-    }
-    
-    @IBAction func zoomOutButtonPressed(_ sender: UIButton) {
-        performCameraZoom(amount: -2.0)
-    }
-    
-    @IBAction func pitchUpButtonPressed(_ sender: UIButton) {
-        performCameraPitch(degrees: 15)
-    }
-    
-    @IBAction func pitchDownButtonPressed(_ sender: UIButton) {
-        performCameraPitch(degrees: -15)
-    }
-    
-    @IBAction func zoomInButtonPressed(_ sender: UIButton) {
-        performCameraZoom(amount: 2.0)
-    }
-    
-    @IBAction func yawLeftButtonPressed(_ sender: UIButton) {
-        performCameraYaw(degrees: -45.0/2)
-    }
-    
-    func performCameraYaw(degrees: Float) {
-        let rotation = SCNAction.rotate(
-            by: CGFloat(GLKMathDegreesToRadians(degrees)),
-            around: SCNVector3(0,1,0),
-            duration: TimeInterval(abs(degrees) / 90.0))
-        
-        rotation.timingMode = .easeInEaseOut
-        
-        cameraYaw?.runAction(rotation)
-    }
-    
-    func performCameraPitch(degrees: CGFloat) {
-        let rotation = SCNAction.rotate(
-            by: (-1) * CGFloat(GLKMathDegreesToRadians(Float(degrees))),
-            around: SCNVector3(1,0,0),
-            duration: TimeInterval(abs(degrees) / 90.0))
-        
-        rotation.timingMode = .easeInEaseOut
-        
-        cameraPitch?.runAction(rotation)
-    }
-    
-    func performCameraZoom(amount: CGFloat) {
-        let zoom = SCNAction.move(by: SCNVector3(0,0,(-1) * amount), duration: 0.2)
-        zoom.timingMode = .easeInEaseOut
-        
-        cameraZoom?.runAction(zoom)
-    }
-    
     @IBAction func cameraControlsButtonPressed(_ sender: UIButton) {
-        
         // Raise or lower view
         if controlsView.isHidden {
             raiseControls()
@@ -247,61 +153,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverP
         }
     }
     
-    @IBAction func unlockButtonPressed(_ sender: UIButton) {
-        sceneView.allowsCameraControl ? exitFreeRoam() : enterFreeRoam()
-    }
-    
     @IBAction func optionsButtonPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: "ingameOptionsSegue", sender: self)
-    }
-    
-    
-    fileprivate func enterFreeRoam() {
-        freeRoamLabel.isHidden = false
-        sceneView.allowsCameraControl = true
-        
-        sceneView.cameraControlConfiguration.autoSwitchToFreeCamera = false
-        
-        self.cameraSaveParams.position = cameraZoom.position
-        self.cameraSaveParams.rotation = cameraZoom.rotation
-        self.cameraSaveParams.orientation = cameraZoom.orientation
-        self.cameraSaveParams.fieldOfView = cameraZoom.camera!.fieldOfView
-        
-        for button in dPadButtons {
-            button.isEnabled = false
-        }
-        
-        for button in zoomButtons {
-            button.isEnabled = false
-        }
-        
-        unlockButton.setImage(UIImage(named: "unlock"), for: .normal)
-    }
-    
-    fileprivate func exitFreeRoam() {
-        sceneView.defaultCameraController.stopInertia()
-        sceneView.allowsCameraControl = false
-        
-        // Recall the parameters (TODO: animate these later ?)
-        
-        SCNTransaction.animationDuration = 0.5
-        
-        cameraZoom.position = cameraSaveParams.position
-        cameraZoom.rotation = cameraSaveParams.rotation
-        cameraZoom.orientation = cameraSaveParams.orientation
-        cameraZoom.camera!.fieldOfView = cameraSaveParams.fieldOfView
-        
-        for button in dPadButtons {
-            button.isEnabled = true
-        }
-        
-        for button in zoomButtons {
-            button.isEnabled = true
-        }
-        
-        unlockButton.setImage(UIImage(named: "lock"), for: .normal)
-        
-        freeRoamLabel.isHidden = true
     }
     
     func gameChangedPlayerTo(color : String) {
@@ -317,14 +170,32 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverP
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "ingameOptionsSegue" {
-        
             let popoverViewController = segue.destination as! InGameOptionsTableViewController
             popoverViewController.popoverPresentationController?.backgroundColor = UIColor.white
             popoverViewController.modalPresentationStyle = UIModalPresentationStyle.popover
             popoverViewController.popoverPresentationController?.sourceRect = ingameOptionsButton.bounds
             popoverViewController.popoverPresentationController!.delegate = self
             popoverViewController.gameViewController = self
+        } else if let vc = segue.destination as? CameraControlsViewController {
+            vc.cameraControlDelegate = self
+            vc.initCameraController(scene: Chess.sharedInstance.scene.scene!)
         }
+    }
+    
+    func choosePawnPromotion(callback: @escaping (Piece.PieceType) -> Void) {
+        
+    }
+    
+    func cameraControlWasEnabled() {
+        freeRoamLabel.isHidden = false
+        sceneView.allowsCameraControl = true
+        sceneView.cameraControlConfiguration.autoSwitchToFreeCamera = false
+    }
+    
+    func cameraControlWasDisabled() {
+        sceneView.defaultCameraController.stopInertia()
+        sceneView.allowsCameraControl = false
+        freeRoamLabel.isHidden = true
     }
     
     func dismissGame() {
@@ -341,14 +212,20 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverP
         self.view.addSubview(self.loadingView!)
         self.view.bringSubviewToFront(self.loadingView!)
         
+        // TODO: Update with semaphore
         UIView.animate(withDuration: 0.5, animations: {
             self.loadingView?.alpha = 1
-        }) {[unowned self] (completed) in
+        }) { (completed) in
             self.sceneView.scene = nil
             Chess.sharedInstance.scene = nil
             Chess.sharedInstance.game.gameInstance.delegate = nil
             Chess.sharedInstance.game = nil
-            self.gameplayDelegate.returnToMenu()
         }
+        
+        gameplayDelegate.returnToMenu(presentedGameView: self)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        gameplayDelegate = nil
     }
 }

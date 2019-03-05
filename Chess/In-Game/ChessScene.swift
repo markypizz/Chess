@@ -28,7 +28,6 @@ class ChessScene {
     
     var pieces = [SceneChessPiece]()
     var highlightedPiece : SCNNode? = nil
-    
     var particleSystem : SCNParticleSystem!
     
     var firstTappedLocation : BoardLocation? {
@@ -140,7 +139,6 @@ class ChessScene {
         }
     }
     
-    //Why does this work?
     func nodePositionFor(boardLocation : BoardLocation) -> SCNVector3 {
         let x = Float(boardLocation.x) - pieceCoordOffset
         let y = Float(boardLocation.y) - pieceCoordOffset
@@ -150,7 +148,6 @@ class ChessScene {
         
     }
     
-    //When this one does with +1?
     func boardLocationFor(nodePosition : SCNVector3) -> BoardLocation {
         
         let column = Int(nodePosition.z + boardCoordOffset)

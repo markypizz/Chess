@@ -24,6 +24,8 @@
 		2361C11321D1870D004362A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2361C11121D1870D004362A5 /* LaunchScreen.storyboard */; };
 		2361C11E21D1870D004362A5 /* ChessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2361C11D21D1870D004362A5 /* ChessTests.swift */; };
 		2366F77121D5F58800218D09 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2366F77021D5F58800218D09 /* SetupViewController.swift */; };
+		2385F7A9222C934100EC8E50 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2385F7A8222C934100EC8E50 /* CameraController.swift */; };
+		2385F7AD222C96EF00EC8E50 /* CameraControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2385F7AC222C96EE00EC8E50 /* CameraControlsViewController.swift */; };
 		23A9017921D9E0D400A05808 /* Chess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A9017821D9E0D400A05808 /* Chess.swift */; };
 		23E1BAE9222B16530068AFF3 /* SideSelectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E1BAE8222B16530068AFF3 /* SideSelectCollectionViewController.swift */; };
 		23E1BAEB222B223C0068AFF3 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E1BAEA222B223C0068AFF3 /* OptionsViewController.swift */; };
@@ -64,6 +66,8 @@
 		2361C11D21D1870D004362A5 /* ChessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessTests.swift; sourceTree = "<group>"; };
 		2361C11F21D1870D004362A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2366F77021D5F58800218D09 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
+		2385F7A8222C934100EC8E50 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		2385F7AC222C96EE00EC8E50 /* CameraControlsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraControlsViewController.swift; sourceTree = "<group>"; };
 		23A9017821D9E0D400A05808 /* Chess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chess.swift; sourceTree = "<group>"; };
 		23E1BAE8222B16530068AFF3 /* SideSelectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideSelectCollectionViewController.swift; sourceTree = "<group>"; };
 		23E1BAEA222B223C0068AFF3 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
@@ -109,9 +113,11 @@
 		230DB9A022236BB600C4A0AC /* In-Game */ = {
 			isa = PBXGroup;
 			children = (
+				2385F7AC222C96EE00EC8E50 /* CameraControlsViewController.swift */,
 				234580BC21D1EE0100CF6956 /* ChessScene.scn */,
 				234580C321D1F13F00CF6956 /* ChessScene.swift */,
 				2361C10A21D1870B004362A5 /* GameViewController.swift */,
+				2385F7A8222C934100EC8E50 /* CameraController.swift */,
 				230DB99E22236B9600C4A0AC /* InGameOptionsTableViewController.swift */,
 			);
 			path = "In-Game";
@@ -378,7 +384,9 @@
 				2361C10321D1870B004362A5 /* AppDelegate.swift in Sources */,
 				2348349921FD1D4C00BB9DF6 /* PopoverDifficultyViewController.swift in Sources */,
 				230DB99F22236B9600C4A0AC /* InGameOptionsTableViewController.swift in Sources */,
+				2385F7A9222C934100EC8E50 /* CameraController.swift in Sources */,
 				2301305D2202D7FC00967ABC /* BoardOptionsCollectionViewCell.swift in Sources */,
+				2385F7AD222C96EF00EC8E50 /* CameraControlsViewController.swift in Sources */,
 				234580C421D1F13F00CF6956 /* ChessScene.swift in Sources */,
 				2366F77121D5F58800218D09 /* SetupViewController.swift in Sources */,
 				2341B7FC222A776F00C383F2 /* OptionsPageViewController.swift in Sources */,

@@ -24,6 +24,8 @@ class ChessGame : GameDelegate {
     var removeLocation : BoardLocation?
     
     // A little weird, is there a better way to do this?
+    
+    //TODO: yes, a delegate
     var gameViewController : GameViewController!
     
     init(white: PlayerType, whiteDifficulty : AIConfiguration.Difficulty, black: PlayerType, blackDifficulty : AIConfiguration.Difficulty) {
@@ -140,9 +142,7 @@ class ChessGame : GameDelegate {
     }
     
     func promotedTypeForPawn(location: BoardLocation, player: Human, possiblePromotions: [Piece.PieceType], callback: @escaping (Piece.PieceType) -> Void) {
-        
-        //For now always queen
-        //return Piece.PieceType.queen
+        gameViewController.choosePawnPromotion(callback: callback)
     }
     
     func trySceneUpdates() {

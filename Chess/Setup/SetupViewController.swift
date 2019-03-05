@@ -17,12 +17,10 @@ enum LoadError : Error {
 
 class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverPresentationControllerDelegate, BlackDifficultyDelegate, WhiteDifficultyDelegate, GameplayDelegate {
     
-    func returnToMenu() {
+    func returnToMenu(presentedGameView: UIViewController) {
         // Return to menu
-        gameView.dismiss(animated: true, completion: nil)
+        presentedGameView.dismiss(animated: true, completion: nil)
     }
-    
-    var gameView : GameViewController!
     
     @IBOutlet weak var playerConfigView: UIView!
     @IBOutlet weak var whiteSegmentedControl: UISegmentedControl!
@@ -76,6 +74,11 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         demoSceneView.delegate = self
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        demoSceneView.scene = nil
+        demoSceneView.delegate = nil
+    }
+    
     override func viewDidLayoutSubviews() {
         if (loadingView != nil) {
             loadingView?.frame = demoSceneView.frame
@@ -91,7 +94,7 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
     }
     
     @IBAction func beginButtonPressed(_ sender: Any) {
-        gameView = storyboard?.instantiateViewController(withIdentifier: "chessView") as? GameViewController
+        let gameView = storyboard?.instantiateViewController(withIdentifier: "chessView") as! GameViewController
         gameView.gameplayDelegate = self
         
         Chess.sharedInstance = Chess()
@@ -106,8 +109,10 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         
         gameView.modalTransitionStyle = .flipHorizontal
         
-        self.present(gameView, animated: true, completion: { () in
-            self.gameView.sceneView.scene = Chess.sharedInstance.scene.scene
+        //gameView.scene = Chess.sharedInstance.scene.scene!
+        
+        self.present(gameView, animated: true, completion: {
+            gameView.sceneView.scene = Chess.sharedInstance.scene.scene
         })
     }
 
