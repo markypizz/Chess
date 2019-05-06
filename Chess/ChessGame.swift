@@ -10,7 +10,7 @@ import Foundation
 import SwiftChess
 
 class ChessGame : GameDelegate {
-    var gameInstance: Game
+    var gameInstance : Game
     var whitePlayer : Player
     var blackPlayer : Player
     
@@ -41,9 +41,8 @@ class ChessGame : GameDelegate {
             blackPlayer = Human(color: .black)
         }
         
+        // One use at a time
         gameInstance = Game(firstPlayer: whitePlayer, secondPlayer: blackPlayer)
-        
-        //Chess.sharedInstance.scene = ChessScene()
         
         gameInstance.delegate = self
     }
@@ -64,9 +63,12 @@ class ChessGame : GameDelegate {
     func gameDidChangeCurrentPlayer(game: Game) {
         gameViewController.gameChangedPlayerTo(color: game.currentPlayer.color.string)
         //AI will make move on its turn
+        
         if let player = game.currentPlayer as? AIPlayer {
             player.makeMoveAsync()
-        } /* ---Uncomment to force kingside castle---
+        }
+        
+        /* ---Uncomment to force kingside castle---
          else {
             if let player = game.currentPlayer as? Human {
                 if game.board.canColorCastle(color: game.currentPlayer.color, side: .kingSide) {
@@ -143,6 +145,19 @@ class ChessGame : GameDelegate {
     
     func promotedTypeForPawn(location: BoardLocation, player: Human, possiblePromotions: [Piece.PieceType], callback: @escaping (Piece.PieceType) -> Void) {
         gameViewController.choosePawnPromotion(callback: callback)
+    }
+    
+    func deInitGame() {
+        // Let turn finish if in progress, then block move and deinit game
+        
+        gameInstance.lock.lock()
+        gameInstance.state = .aborted
+        
+        gameInstance.delegate = nil
+        Chess.sharedInstance.game = nil
+        
+        gameInstance.lock.unlock()
+        Chess.sharedInstance.deInitCond.signal()
     }
     
     func trySceneUpdates() {

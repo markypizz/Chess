@@ -10,7 +10,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftChess:
-    :commit: bff03a666c0c1c5ba099688af3a45de8ff805b31
+    :commit: 36c9c853ba7f96e0a1d15348bdaf442bfe46f7db
     :git: https://github.com/markypizz/SwiftChess
 
 SPEC CHECKSUMS:
@@ -18,4 +18,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: b2964ccedd60eb808996957b339f50c1d5650586
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

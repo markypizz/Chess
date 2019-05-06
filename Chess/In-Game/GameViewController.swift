@@ -212,14 +212,19 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, UIPopoverP
         self.view.addSubview(self.loadingView!)
         self.view.bringSubviewToFront(self.loadingView!)
         
-        // TODO: Update with semaphore
+        // There needs to be a bit of time before we set the scene to nil
+        // in case of pending moves that are still in progress.
+        // In a perfect world, we would mutex this, but a full half second
+        // should be more than enough time to finish all on-screen scene moves
         UIView.animate(withDuration: 0.5, animations: {
             self.loadingView?.alpha = 1
         }) { (completed) in
             self.sceneView.scene = nil
-            Chess.sharedInstance.scene = nil
-            Chess.sharedInstance.game.gameInstance.delegate = nil
-            Chess.sharedInstance.game = nil
+        }
+        
+        // De init game
+        DispatchQueue.global(qos: .background).async {
+            Chess.sharedInstance.game.deInitGame()
         }
         
         gameplayDelegate.returnToMenu(presentedGameView: self)

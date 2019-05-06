@@ -21,7 +21,7 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 Chess.xcworkspace/xcuserdata/
-
+*.xcuserstate
 ## Other
 *.moved-aside
 *.xccheckout
@@ -52,7 +52,8 @@ playground.xcworkspace
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
 # Pods/
-#
+Pods/*
+
 # Add this line if you want to avoid checking in source code from the Xcode workspace
 # *.xcworkspace
 

@@ -22,6 +22,11 @@ class Chess {
     
     static var sharedInstance = Chess()
     
+    // Condition variable when aborting an in-progress game
+    // Need to make sure the game object(s) is/are de-initialized
+    // before creating a new one
+    var deInitCond = NSCondition()
+    
     init() {}
     
     // Static global constants

@@ -310,7 +310,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Chess/Pods-Chess-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Chess/Pods-Chess-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SwiftChess/SwiftChess.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -321,7 +321,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chess/Pods-Chess-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Chess/Pods-Chess-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A0FBD15F8EE8D066D8770129 /* [CP] Check Pods Manifest.lock */ = {
