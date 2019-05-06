@@ -93,27 +93,44 @@ class SetupViewController: UIViewController, SCNSceneRendererDelegate, UIPopover
         }
     }
     
-    @IBAction func beginButtonPressed(_ sender: Any) {
+    fileprivate func launchGameSync() {
         let gameView = storyboard?.instantiateViewController(withIdentifier: "chessView") as! GameViewController
-        gameView.gameplayDelegate = self
         
-        Chess.sharedInstance = Chess()
-        Chess.sharedInstance.game = ChessGame(
-            white: PlayerType(rawValue: whiteSegmentedControl!.selectedSegmentIndex)!,
-            whiteDifficulty: AIConfiguration.Difficulty(rawValue: whiteDiff)!,
-            black: PlayerType(rawValue: blackSegmentedControl!.selectedSegmentIndex)!,
-            blackDifficulty: AIConfiguration.Difficulty(rawValue: blackDiff)!)
+        // Wait until game is de-initialized
+        Chess.sharedInstance.deInitCond.lock()
         
-        Chess.sharedInstance.scene = ChessScene()
-        Chess.sharedInstance.demoScene = nil
+        while (Chess.sharedInstance.game != nil) {
+            Chess.sharedInstance.deInitCond.wait()
+        }
         
-        gameView.modalTransitionStyle = .flipHorizontal
+        // Pass it back to the main thread
+        DispatchQueue.main.async {
+            gameView.gameplayDelegate = self
+            
+            Chess.sharedInstance = Chess()
+            Chess.sharedInstance.game = ChessGame(
+                white: PlayerType(rawValue: self.whiteSegmentedControl!.selectedSegmentIndex)!,
+                whiteDifficulty: AIConfiguration.Difficulty(rawValue: self.whiteDiff)!,
+                black: PlayerType(rawValue: self.blackSegmentedControl!.selectedSegmentIndex)!,
+                blackDifficulty: AIConfiguration.Difficulty(rawValue: self.blackDiff)!)
+            
+            Chess.sharedInstance.scene = ChessScene()
+            Chess.sharedInstance.demoScene = nil
+            
+            gameView.modalTransitionStyle = .flipHorizontal
+            
+            self.present(gameView, animated: true, completion: {
+                gameView.sceneView.scene = Chess.sharedInstance.scene.scene
+            })
+        }
         
-        //gameView.scene = Chess.sharedInstance.scene.scene!
-        
-        self.present(gameView, animated: true, completion: {
-            gameView.sceneView.scene = Chess.sharedInstance.scene.scene
-        })
+        Chess.sharedInstance.deInitCond.unlock()
+    }
+    
+    @IBAction func beginButtonPressed(_ sender: Any) {
+        DispatchQueue.global(qos: .background).async {
+            self.launchGameSync()
+        }
     }
 
     
